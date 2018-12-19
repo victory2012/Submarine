@@ -12,7 +12,7 @@ module.exports = {
   dev: {
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/pc',
+    assetsPublicPath: '',
     proxyTable: {
       '/api': {
         target: apiPath, // 实际请求地址
@@ -62,7 +62,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/pc/',
+    assetsPublicPath: '/',
 
     /**
      * Source Maps

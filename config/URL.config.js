@@ -1,8 +1,8 @@
 const env = process.env.pack_ENV === 'test';
 let URL;
 if (!env) {
-  URL = '"https://www.myriadiot.net/api"';
+  URL = '"/api"'; // 线上地址 待定
 } else {
-  URL = '"http://192.168.1.192/api"';
+  URL = '"http://47.98.232.46:8586/api"';
 }
 module.exports = URL;

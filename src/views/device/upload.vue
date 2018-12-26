@@ -47,20 +47,20 @@
             :placeholder="$t('device.deviceCode')"
             auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item prop="deviceType"
+        <!-- <el-form-item prop="deviceType"
           :label="$t('device.deviceCategory')"
           :label-width=" '150px' ">
           <el-select style="width:200px;"
             size="small"
             v-model="regform.deviceType "
             :placeholder="$t('device.deviceCategory')">
-            <!-- 设备类别 -->
+            设备类别
             <el-option v-for="item in categoryArr"
               :key="item.name"
               :label="item.label"
               :value="item.id"></el-option>
           </el-select>
-        </el-form-item>
+        </el-form-item> -->
         <!-- 相关企业 -->
         <el-form-item prop="company"
           :label="$t('device.company')"
@@ -107,15 +107,15 @@ export default {
       createDevice: false,
       fullscreenLoading: false,
       regform: {},
-      categoryArr: [],
+      // categoryArr: [],
       index: 0,
       regRules: {
         name: [
           { required: true, message: t('addDevice.errorTip'), trigger: "change" } // 请输入设备编号
         ],
-        deviceType: [
-          { required: true, message: t('device.deviceCategory'), trigger: "change" } // 请选择设备类别
-        ],
+        // deviceType: [
+        //   { required: true, message: t('device.deviceCategory'), trigger: "change" } // 请选择设备类别
+        // ],
         company: [{ required: true, message: t('device.selectCampany'), trigger: "change" }] // 请选择企业
       },
     };
@@ -127,31 +127,30 @@ export default {
     this.storge = JSON.parse(utils.getStorage("loginData"));
     if (this.storge.type === 1) {
       this.manufacturerName = true;
-      this.getCompany();
+      // this.getCompany();
     }
   },
 
   methods: {
-    /* 获取公司列表 */
-    getCompany () {
-      this.categoryArr = [];
-
-      this.$api.deviceCategory().then(res => {
-        console.log(res);
-        if (res.data && res.data.code === 0) {
-          let result = res.data.data;
-          result.forEach(key => {
-            if (key.id === 1) {
-              key.label = t('device.batteryGps'); // "电池追踪";
-            }
-            if (key.id === 2) {
-              key.label = t('device.batteryMonitor'); // "电池监测";
-            }
-            this.categoryArr.push(key);
-          });
-        }
-      });
-    },
+    /* 获取公司列表  */
+    // getCompany () {
+    //   this.categoryArr = [];
+    //   this.$api.deviceCategory().then(res => {
+    //     console.log(res);
+    //     if (res.data && res.data.code === 0) {
+    //       let result = res.data.data;
+    //       result.forEach(key => {
+    //         if (key.id === 1) {
+    //           key.label = t('device.batteryGps'); // "电池追踪";
+    //         }
+    //         if (key.id === 2) {
+    //           key.label = t('device.batteryMonitor'); // "电池监测";
+    //         }
+    //         this.categoryArr.push(key);
+    //       });
+    //     }
+    //   });
+    // },
     resetRegform (form) {
       this.regDevice = false;
       this.$refs[form].resetFields();
@@ -160,13 +159,13 @@ export default {
       this.$refs[form].validate(valid => {
         if (valid) {
           this.createDevice = true;
-          let category;
+          // let category;
           let companyName;
-          this.categoryArr.forEach(key => {
-            if (key.id === this.regform.deviceType) {
-              category = key.name;
-            }
-          });
+          // this.categoryArr.forEach(key => {
+          //   // if (key.id === this.regform.deviceType) {
+          //   //   category = key.name;
+          //   // }
+          // });
           this.COMPANYARRAY.forEach(key => {
             if (key.id === this.regform.company) {
               companyName = key.name;
@@ -175,13 +174,14 @@ export default {
           let deviceObj = {
             code: this.regform.name, // 设备编号
             companyId: this.regform.company, // 公司id
-            categoryId: this.regform.deviceType,
+            // categoryId: this.regform.deviceType,
             companyName: companyName,
-            category: category
+            // category: category
           };
           this.$api.deviceAdd(deviceObj).then(res => {
             console.log(res);
             this.createDevice = false;
+            console.log(JSON.stringify(res.data) + "!!!" + JSON.stringify(res.data.code))
             if (res.data && res.data.code === 0) {
               this.$message({
                 type: "success",

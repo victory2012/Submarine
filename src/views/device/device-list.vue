@@ -6,7 +6,7 @@
       </div>
       <div class="select">
         <div class="item">
-          <!-- 设备编号 -->
+          <!-- 设备编号  -->
           <el-input size="small"
             style="width:100%"
             v-model.trim="content"
@@ -75,7 +75,7 @@
           :label="$t('device.bindStatus')">
         </el-table-column>
         <!-- 监测设备 -->
-        <!-- <el-table-column align="center"
+        <el-table-column align="center"
           :label="$t('device.handle')">
           <template slot-scope="scope">
             <el-button @click.native.prevent="MonitorDevice(scope.row)"
@@ -84,7 +84,7 @@
               {{$t('batteryList.view')}}
             </el-button>
           </template>
-        </el-table-column> -->
+        </el-table-column>
         <el-table-column :label="$t('batteryList.handle')"
           align="center"
           width="200px">
@@ -252,7 +252,7 @@ export default {
     clearAll () {
       this.regState = "";
       this.bindState = "";
-      this.content = "";
+      // this.content = "";
       this.manufactur = "";
       this.getDeviceList();
     },

@@ -98,6 +98,10 @@ module.exports = {
     child_process: 'empty'
   },
   externals: {
-    xlsx: 'XLSX'
+    xlsx: 'XLSX',
+    echarts: 'echarts',
+    axios: 'axios',
+    vuex: 'Vuex',
+    'vue-router': 'VueRouter'
   }
 };

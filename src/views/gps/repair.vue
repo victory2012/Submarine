@@ -1,22 +1,21 @@
 <template>
   <div>
-    <el-button @click="repairHandle"
-      type="primary">{{$t('menu.repairGps')}}</el-button>
+    <el-button @click="repairHandle" type="primary">{{$t('menu.repairGps')}}</el-button>
   </div>
 </template>
 
 <script>
 
 export default {
-  data () {
+  data() {
     return {
 
     };
   },
-  mounted () { },
+  mounted() { },
 
   methods: {
-    repairHandle () {
+    repairHandle() {
       this.$api.repairGps().then(res => {
         console.log(res);
         if (res.data && res.data.code === 0) {

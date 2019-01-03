@@ -9,58 +9,36 @@
     <div class="transferWrap">
       <div class="item stock">
         <div class="header">
-          <el-checkbox v-model="stockChecked"
-            @change="stockAll">{{$t('stock.selectAll')}}</el-checkbox>
+          <el-checkbox v-model="stockChecked" @change="stockAll">{{$t('stock.selectAll')}}</el-checkbox>
         </div>
         <ul class="listArr">
-          <li class="listItme"
-            v-for="key in inventoryArr"
-            :key="key.id">
+          <li class="listItme" v-for="key in inventoryArr" :key="key.id">
             <el-checkbox v-model="key.checked">{{key.code}}</el-checkbox>
           </li>
-          <li v-show="noInventory"
-            class="nodata">{{InventoryText}}</li>
+          <li v-show="noInventory" class="nodata">{{InventoryText}}</li>
         </ul>
       </div>
       <div class="item btns">
         <div class="btnWarp">
           <!-- 分配 -->
-          <el-button :loading="distributeLoading"
-            class="btn"
-            @click="distribute"
-            size="mini"
-            type="primary">{{$t('stock.distribution')}}<i class="el-icon-arrow-right el-icon--right"></i></el-button>
+          <el-button :loading="distributeLoading" class="btn" @click="distribute" size="mini" type="primary">{{$t('stock.distribution')}}<i class="el-icon-arrow-right el-icon--right"></i></el-button>
           <!-- 回收 -->
-          <el-button :loading="recoverLoading"
-            class="btn"
-            @click="recover"
-            size="mini"
-            type="primary"><i class="el-icon-arrow-left el-icon--left"></i>{{$t('stock.recovery')}}</el-button>
+          <el-button :loading="recoverLoading" class="btn" @click="recover" size="mini" type="primary"><i class="el-icon-arrow-left el-icon--left"></i>{{$t('stock.recovery')}}</el-button>
         </div>
       </div>
       <div class="item company">
         <div class="header">
-          <el-checkbox v-model="companyChecked"
-            @change="selectAll">{{$t('stock.selectAll')}}</el-checkbox>
-          <el-select size="mini"
-            v-model="manufacter"
-            @change="getCompanyPair"
-            class="manufacter">
-            <el-option v-for="item in companyArr"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id">
+          <el-checkbox v-model="companyChecked" @change="selectAll">{{$t('stock.selectAll')}}</el-checkbox>
+          <el-select size="mini" v-model="manufacter" @change="getCompanyPair" class="manufacter">
+            <el-option v-for="item in companyArr" :key="item.id" :label="item.name" :value="item.id">
             </el-option>
           </el-select>
         </div>
         <ul class="listArr">
-          <li class="listItme"
-            v-for="key in companyPairArr"
-            :key="key.id">
+          <li class="listItme" v-for="key in companyPairArr" :key="key.id">
             <el-checkbox v-model="key.checked">{{key.code}}</el-checkbox>
           </li>
-          <li v-show="noCompanyPair"
-            class="nodata">{{companyPairText}}</li>
+          <li v-show="noCompanyPair" class="nodata">{{companyPairText}}</li>
         </ul>
       </div>
     </div>
@@ -75,7 +53,7 @@
 import t from "@/utils/translate";
 
 export default {
-  data () {
+  data() {
     return {
       stockChecked: false,
       companyChecked: false,
@@ -91,13 +69,13 @@ export default {
       companyPairText: t('stock.load') // "加载中..."
     };
   },
-  mounted () {
+  mounted() {
     this.getCompany();
     this.getInventoryPair();
   },
   methods: {
     /* 获取客户企业 */
-    getCompany () {
+    getCompany() {
       this.companyPairText = t('stock.load'); // "加载中...";
       this.noCompanyPair = true;
       this.$api.purchaseNames2().then(res => {
@@ -118,7 +96,7 @@ export default {
       });
     },
 
-    getCompanyPair () {
+    getCompanyPair() {
       this.$api.companyPair(this.manufacter).then(res => {
         console.log("companyArr", res.data);
         this.companyPairArr = [];
@@ -142,7 +120,7 @@ export default {
       });
     },
 
-    getInventoryPair () {
+    getInventoryPair() {
       this.InventoryText = t('stock.load'); // "加载中...";
       this.noInventory = true;
       this.$api.inventoryPair().then(res => {
@@ -167,7 +145,7 @@ export default {
         }
       });
     },
-    selectAll () {
+    selectAll() {
       if (this.companyPairArr.length > 0) {
         this.companyPairArr.forEach(key => {
           if (this.companyChecked) {
@@ -178,7 +156,7 @@ export default {
         });
       }
     },
-    stockAll () {
+    stockAll() {
       if (this.inventoryArr.length > 0) {
         this.inventoryArr.forEach(key => {
           if (this.stockChecked) {
@@ -190,7 +168,7 @@ export default {
       }
     },
     /* 回收 */
-    recover () {
+    recover() {
       let listarr = [];
       this.companyPairArr.forEach(key => {
         if (key.checked) {
@@ -217,7 +195,7 @@ export default {
       });
     },
     /* 分配 */
-    distribute () {
+    distribute() {
       if (!this.manufacter) {
         return;
       }

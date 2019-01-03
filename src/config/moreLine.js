@@ -30,8 +30,7 @@ export default {
     containLabel: true
   },
   /* eslint-disable */
-  dataZoom: [
-    {
+  dataZoom: [{
       // show: true,
       type: 'slider',
       start: 0,
@@ -82,8 +81,7 @@ export default {
       show: false
     }
   },
-  series: [
-    {
+  series: [{
       name: '', // 本期
       type: 'line',
       smooth: true,

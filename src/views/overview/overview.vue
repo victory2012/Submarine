@@ -7,45 +7,26 @@
         <el-col :span="14">
           <div class="chart">
             <div class="warperItme">
-              <pie-chart :loadingData="chatLoading"
-                :cardData="cardData"></pie-chart>
+              <pie-chart :loadingData="chatLoading" :cardData="cardData"></pie-chart>
               <div class="tables shadow">
-                <el-table v-loading="loading"
-                  :data="tableData"
-                  style="width: 100%;">
+                <el-table v-loading="loading" :data="tableData" style="width: 100%;">
                   <!-- 告警发生时间 -->
-                  <el-table-column prop="createTime"
-                    align="center"
-                    :label="$t('alarmList.time')"
-                    width="170">
+                  <el-table-column prop="createTime" align="center" :label="$t('alarmList.time')" width="170">
                   </el-table-column>
                   <!-- 电池编号 -->
-                  <el-table-column prop="hostCode"
-                    align="center"
-                    :label="$t('alarmList.batteryCode')">
+                  <el-table-column prop="hostCode" align="center" :label="$t('alarmList.batteryCode')">
                   </el-table-column>
                   <!-- 告警项目 -->
-                  <el-table-column prop="items"
-                    align="center"
-                    width="120"
-                    :label="$t('alarmList.alarmItem')">
+                  <el-table-column prop="items" align="center" width="120" :label="$t('alarmList.alarmItem')">
                   </el-table-column>
                   <!-- 告警内容 -->
-                  <el-table-column prop="content"
-                    align="center"
-                    :label="$t('alarmList.content')"
-                    width="220">
+                  <el-table-column prop="content" align="center" :label="$t('alarmList.content')" width="220">
                   </el-table-column>
                   <!-- 告警层级 -->
-                  <el-table-column prop="hierarchy"
-                    align="center"
-                    :label="$t('alarmList.alarmHierarchy')"
-                    width="110">
+                  <el-table-column prop="hierarchy" align="center" :label="$t('alarmList.alarmHierarchy')" width="110">
                   </el-table-column>
                   <!-- 告警级别 -->
-                  <el-table-column prop="levels"
-                    align="center"
-                    :label="$t('alarmList.alarmLevel')">
+                  <el-table-column prop="levels" align="center" :label="$t('alarmList.alarmLevel')">
                   </el-table-column>
                   <!-- <el-table-column prop="address" align="center" label="详情" width="120">
                 <template slot-scope="scope">
@@ -55,109 +36,68 @@
                 </template>
               </el-table-column> -->
                 </el-table>
-                <p v-show="!isNoAlarmData"
-                  class="more"><a @click="ToMore">{{$t('alarmList.more')}}</a><i class="iconfont icon-more"></i></p>
+                <p v-show="!isNoAlarmData" class="more"><a @click="ToMore">{{$t('alarmList.more')}}</a><i class="iconfont icon-more"></i></p>
               </div>
             </div>
           </div>
         </el-col>
         <el-col :span="10">
           <div class="list">
-            <div v-if="!isUser"
-              class="listItme shadow">
-              <el-table v-loading="company"
-                :data="custormTable">
-                <el-table-column prop="company"
-                  align="center"
-                  :label="$t('alarmList.customer')"
-                  width="200">
+            <div v-if="!isUser" class="listItme shadow">
+              <el-table v-loading="company" :data="custormTable">
+                <el-table-column prop="company" align="center" :label="$t('alarmList.customer')" width="200">
                 </el-table-column>
                 <!-- 电池数 -->
-                <el-table-column prop="total"
-                  align="center"
-                  :label="$t('overview.subtotalField')">
+                <el-table-column prop="total" align="center" :label="$t('overview.subtotalField')">
                 </el-table-column>
                 <!-- 有效监控数 -->
-                <el-table-column prop="activeTotal"
-                  align="center"
-                  :label="$t('overview.effectiveField')">
+                <el-table-column prop="activeTotal" align="center" :label="$t('overview.effectiveField')">
                 </el-table-column>
                 <!-- 告警电池数 -->
-                <el-table-column prop="alarmedTotal"
-                  align="center"
-                  :label="$t('overview.abnormalField')">
+                <el-table-column prop="alarmedTotal" align="center" :label="$t('overview.abnormalField')">
                 </el-table-column>
               </el-table>
-              <div v-if="companyMoreBtn"
-                class="showMore">
-                <p @click="showCampanyMore"
-                  class="">
+              <div v-if="companyMoreBtn" class="showMore">
+                <p @click="showCampanyMore" class="">
                   <span>{{companyBtnText}}</span>
-                  <i :class="{'routo': openMoreCompany}"
-                    class="iconfont icon-down"></i>
+                  <i :class="{'routo': openMoreCompany}" class="iconfont icon-down"></i>
                 </p>
               </div>
             </div>
-            <div class="listItme shadow"
-              :style="{minHeight: minHeight + 'px'}">
-              <el-table v-loading="provence"
-                :data="provenceTable">
-                <el-table-column prop="address"
-                  align="center"
-                  :label="$t('overview.provence')"
-                  width="200">
+            <div class="listItme shadow" :style="{minHeight: minHeight + 'px'}">
+              <el-table v-loading="provence" :data="provenceTable">
+                <el-table-column prop="address" align="center" :label="$t('overview.provence')" width="200">
                 </el-table-column>
-                <el-table-column prop="total"
-                  align="center"
-                  :label="$t('overview.subtotalField')">
+                <el-table-column prop="total" align="center" :label="$t('overview.subtotalField')">
                 </el-table-column>
-                <el-table-column prop="activeTotal"
-                  align="center"
-                  :label="$t('overview.effectiveField')">
+                <el-table-column prop="activeTotal" align="center" :label="$t('overview.effectiveField')">
                 </el-table-column>
-                <el-table-column prop="alarmedTotal"
-                  align="center"
-                  :label="$t('overview.abnormalField')">
+                <el-table-column prop="alarmedTotal" align="center" :label="$t('overview.abnormalField')">
                 </el-table-column>
               </el-table>
               <!-- provenceMoreBtn -->
-              <div v-if="provenceMoreBtn"
-                class="showMore">
+              <div v-if="provenceMoreBtn" class="showMore">
                 <p @click="showProvenceMore">
                   <span>{{provenceBtnText}}</span>
-                  <i :class="{'routo': openMoreProvence}"
-                    class="iconfont icon-down"></i>
+                  <i :class="{'routo': openMoreProvence}" class="iconfont icon-down"></i>
                 </p>
               </div>
             </div>
-            <div class="listItme shadow"
-              :style="{minHeight: minHeight + 'px'}">
-              <el-table v-loading="models"
-                :data="modelTable">
-                <el-table-column prop="models"
-                  align="center"
-                  :label="$t('overview.batteryModel')"
-                  width="200">
+            <div class="listItme shadow" :style="{minHeight: minHeight + 'px'}">
+              <el-table v-loading="models" :data="modelTable">
+                <el-table-column prop="models" align="center" :label="$t('overview.batteryModel')" width="200">
                 </el-table-column>
-                <el-table-column prop="total"
-                  align="center"
-                  :label="$t('overview.subtotalField')">
+                <el-table-column prop="total" align="center" :label="$t('overview.subtotalField')">
                 </el-table-column>
-                <el-table-column prop="activeTotal"
-                  align="center"
-                  :label="$t('overview.effectiveField')">
+                <el-table-column prop="activeTotal" align="center" :label="$t('overview.effectiveField')">
                 </el-table-column>
-                <el-table-column prop="alarmedTotal"
-                  align="center"
-                  :label="$t('overview.abnormalField')">
+                <el-table-column prop="alarmedTotal" align="center" :label="$t('overview.abnormalField')">
                 </el-table-column>
               </el-table>
-              <div v-if="modelMoreBtn"
-                class="showMore">
+              <div v-if="modelMoreBtn" class="showMore">
                 <p @click="showModelMore">
                   <span>{{modelBtnText}}</span>
-                  <i :class="{'routo': openMoreModel}"
-                    class="iconfont icon-down"></i>
+                  <i :class="{'routo': openMoreModel}" class="iconfont icon-down"></i>
                 </p>
               </div>
             </div>
@@ -178,7 +118,7 @@ export default {
     editCard,
     pieChart
   },
-  data () {
+  data() {
     return {
       minHeight: "",
       isUser: false,
@@ -214,7 +154,7 @@ export default {
       Timer: ""
     };
   },
-  mounted () {
+  mounted() {
     let userType = JSON.parse(sessionStorage.getItem("loginData"));
     console.log('userType', userType);
     this.init(userType);
@@ -224,11 +164,11 @@ export default {
       }
     }, 30000);
   },
-  beforeDestroy () {
+  beforeDestroy() {
     clearInterval(this.Timer);
   },
   methods: {
-    init (userType) {
+    init(userType) {
       this.getCardData();
       this.getListData();
       this.getModelData();
@@ -245,7 +185,7 @@ export default {
       }
     },
     /* 统计数据 */
-    getCardData () {
+    getCardData() {
       this.chatLoading = true;
       this.$api.overviewCount().then(res => {
         this.chatLoading = false;
@@ -267,9 +207,9 @@ export default {
         }
       });
     },
-    showMoreData () { },
+    showMoreData() { },
     /* 展开 收起-- 客户数 */
-    showCampanyMore () {
+    showCampanyMore() {
       if (!this.openMoreCompany) {
         this.companyBtnText = t('toggleTip.close');
         this.custormTable = this.allCustormTable;
@@ -280,7 +220,7 @@ export default {
       this.openMoreCompany = !this.openMoreCompany;
     },
     /* 展开 收起-- 型号 */
-    showModelMore () {
+    showModelMore() {
       if (!this.openMoreModel) {
         this.modelBtnText = t('toggleTip.close');
         this.modelTable = this.allModelTable;
@@ -291,7 +231,7 @@ export default {
       this.openMoreModel = !this.openMoreModel;
     },
     /* 展开 收起-- 省份 */
-    showProvenceMore () {
+    showProvenceMore() {
       if (!this.openMoreProvence) {
         this.provenceBtnText = t('toggleTip.close');
         this.provenceTable = this.allProvenceTable;
@@ -302,7 +242,7 @@ export default {
       this.openMoreProvence = !this.openMoreProvence;
     },
     /* 获取客户数据 */
-    getCampanyData () {
+    getCampanyData() {
       this.company = true;
       this.$api.overviewCompany().then(res => {
         console.log("获取客户数据", res);
@@ -330,7 +270,7 @@ export default {
     },
 
     /* 型号数据 */
-    getModelData () {
+    getModelData() {
       this.models = true;
       this.$api.overviewModel().then(res => {
         console.log("型号", res);
@@ -358,7 +298,7 @@ export default {
     },
 
     /* 省份数据 */
-    getProvenceData () {
+    getProvenceData() {
       this.provence = true;
       this.$api.overviewProvence().then(res => {
         console.log("省份数据", res);
@@ -386,7 +326,7 @@ export default {
       });
     },
     /* 告警数据 */
-    getListData () {
+    getListData() {
       this.loading = true;
       let pageObj = {
         pageSize: this.pageSize,
@@ -418,7 +358,7 @@ export default {
         }
       });
     },
-    ToMore () {
+    ToMore() {
       this.$router.push("/battery/alarm");
     }
   }

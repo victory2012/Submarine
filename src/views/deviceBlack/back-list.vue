@@ -1,54 +1,33 @@
 <template>
   <div class="alarmTable">
-    <el-table :data="tableData"
-      style="width: 100%">
+    <el-table :data="tableData" style="width: 100%">
       <!-- 设备编号 -->
-      <el-table-column prop="code"
-        align="center"
-        :label="$t('batteryList.deviceCode')">
+      <el-table-column prop="code" align="center" :label="$t('batteryList.deviceCode')">
       </el-table-column>
       <!-- 电池编号 -->
-      <el-table-column prop="batteryCode"
-        align="center"
-        :label="$t('batteryList.batteryCode')">
+      <el-table-column prop="batteryCode" align="center" :label="$t('batteryList.batteryCode')">
       </el-table-column>
       <!-- 企业名称 -->
-      <el-table-column prop="companyName"
-        align="center"
-        :label="$t('batteryList.enterprise')">
+      <el-table-column prop="companyName" align="center" :label="$t('batteryList.enterprise')">
       </el-table-column>
       <!-- 客户企业 -->
-      <el-table-column prop="subCompanyName"
-        align="center"
-        :label="$t('batteryList.customer')">
+      <el-table-column prop="subCompanyName" align="center" :label="$t('batteryList.customer')">
       </el-table-column>
       <!-- 电池绑定状态 -->
-      <el-table-column prop="bindState"
-        align="center"
-        :label="$t('batteryList.binding')">
+      <el-table-column prop="bindState" align="center" :label="$t('batteryList.binding')">
       </el-table-column>
       <!-- 操作 -->
-      <el-table-column align="center"
-        :label="$t('batteryList.handle')"
-        width="120">
+      <el-table-column align="center" :label="$t('batteryList.handle')" width="120">
         <template slot-scope="scope">
           <!-- 恢复 -->
-          <el-button size="small"
-            @click.native.prevent="recovery(scope.row)"
-            type="text">
+          <el-button size="small" @click.native.prevent="recovery(scope.row)" type="text">
             {{$t('batteryList.recovery')}}
           </el-button>
         </template>
       </el-table-column>
     </el-table>
     <div class="page">
-      <el-pagination @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page.sync="currentPage"
-        :page-sizes="[10, 20, 30, 50]"
-        :page-size="pageSize"
-        layout="sizes, prev, pager, next"
-        :total="total">
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-sizes="[10, 20, 30, 50]" :page-size="pageSize" layout="sizes, prev, pager, next" :total="total">
       </el-pagination>
     </div>
   </div>
@@ -57,7 +36,7 @@
 import t from "@/utils/translate";
 
 export default {
-  data () {
+  data() {
     return {
       currentPage: 1,
       total: 0,
@@ -66,7 +45,7 @@ export default {
     };
   },
   methods: {
-    recovery (data) {
+    recovery(data) {
       let deviceObj = {
         id: data.id,
         status: 0
@@ -82,15 +61,15 @@ export default {
         }
       });
     },
-    handleSizeChange (val) {
+    handleSizeChange(val) {
       this.pageSize = val;
       this.getDeviceList();
     },
-    handleCurrentChange (val) {
+    handleCurrentChange(val) {
       this.currentPage = val;
       this.getDeviceList();
     },
-    getDeviceList () {
+    getDeviceList() {
       let pageObj = {
         pageSize: this.pageSize,
         pageNum: this.currentPage,
@@ -122,7 +101,7 @@ export default {
       });
     }
   },
-  mounted () {
+  mounted() {
     this.getDeviceList();
   }
 };

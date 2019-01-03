@@ -145,7 +145,7 @@ import t from "@/utils/translate";
 
 export default {
   props: ["hostObj"],
-  data () {
+  data() {
     return {
       loading: true,
       total: 0,
@@ -159,13 +159,13 @@ export default {
       tableData: []
     };
   },
-  mounted () {
+  mounted() {
     // console.log(this.hostId);
     // this.hostId = this.$route.query.hostId;
     this.getAlarmData();
   },
   methods: {
-    handleClick (row) {
+    handleClick(row) {
       this.rowObj = row;
       this.$api.allAlarmData(row.dataId).then(res => {
         console.log(res);
@@ -182,18 +182,18 @@ export default {
         }
       });
     },
-    alarmSeting () {
+    alarmSeting() {
       this.settings = true;
     },
-    handleSizeChange (val) {
+    handleSizeChange(val) {
       this.pageSize = val;
       this.getAlarmData();
     },
-    handleCurrentChange (val) {
+    handleCurrentChange(val) {
       this.currentPage = val;
       this.getAlarmData();
     },
-    getAlarmData () {
+    getAlarmData() {
       this.loading = true;
       let pageObj = {
         pageSize: this.pageSize,
@@ -224,7 +224,7 @@ export default {
         }
       });
     },
-    dialogClosed () {
+    dialogClosed() {
       this.batteryForm = {};
     }
   }

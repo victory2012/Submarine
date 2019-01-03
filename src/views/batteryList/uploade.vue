@@ -1,13 +1,9 @@
 <template>
   <div>
-    <div class="items"
-      v-if="AdminRoles.AddBatteries">
-      <el-dropdown trigger="click"
-        placement="bottom"
-        @command="handleCommand">
+    <div class="items" v-if="AdminRoles.AddBatteries">
+      <el-dropdown trigger="click" placement="bottom" @command="handleCommand">
         <span>
-          <img src="../../../static/img/device_reg.png"
-            alt=""><br />
+          <img src="../../../static/img/device_reg.png" alt=""><br />
           <span class="el-dropdown-link">{{$t('batteryList.batteries')}}</span>
         </span>
         <el-dropdown-menu slot="dropdown">
@@ -18,49 +14,24 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
-    <div class="items"
-      v-if="AdminRoles.AddBatteries"
-      @click="resetIndex"
-      style="position: relative">
-      <input class="fileUpload"
-        type="file"
-        @change="fileUpload"
-        v-loading.fullscreen.lock="fullscreenLoading" />
-      <img id="upers"
-        src="../../../static/img/device_import.png"
-        alt="">
+    <div class="items" v-if="AdminRoles.AddBatteries" @click="resetIndex" style="position: relative">
+      <input class="fileUpload" type="file" @change="fileUpload" v-loading.fullscreen.lock="fullscreenLoading" />
+      <img id="upers" src="../../../static/img/device_import.png" alt="">
       <p>{{$t('batteryList.batchImport')}}</p>
     </div>
-    <div class="items"
-      v-if="AdminRoles.addblack"
-      @click="recovery">
-      <img id="recover"
-        src="../../../static/img/device_recover.png"
-        alt="">
+    <div class="items" v-if="AdminRoles.addblack" @click="recovery">
+      <img id="recover" src="../../../static/img/device_recover.png" alt="">
       <p>{{$t('batteryList.defriend')}}</p>
     </div>
-    <el-dialog width="600px"
-      :title="titles"
-      :visible.sync="addModel">
-      <el-form :model="modelForm"
-        label-position="right"
-        :rules="modelFormRules"
-        ref="modelForm">
-        <el-form-item :label="labels"
-          prop="dicValue">
-          <el-input size="small"
-            v-model="modelForm.dicValue"
-            auto-complete="off"></el-input>
+    <el-dialog width="600px" :title="titles" :visible.sync="addModel">
+      <el-form :model="modelForm" label-position="right" :rules="modelFormRules" ref="modelForm">
+        <el-form-item :label="labels" prop="dicValue">
+          <el-input size="small" v-model="modelForm.dicValue" auto-complete="off"></el-input>
         </el-form-item>
       </el-form>
-      <div slot="footer"
-        class="dialog-footer">
-        <el-button size="small"
-          @click="resetModelAdd">{{$t('timeBtn.cancle')}}</el-button>
-        <el-button :loading="addallTypes"
-          size="small"
-          @click="submitModelAdd"
-          type="primary">{{$t('timeBtn.sure')}}</el-button>
+      <div slot="footer" class="dialog-footer">
+        <el-button size="small" @click="resetModelAdd">{{$t('timeBtn.cancle')}}</el-button>
+        <el-button :loading="addallTypes" size="small" @click="submitModelAdd" type="primary">{{$t('timeBtn.sure')}}</el-button>
       </div>
     </el-dialog>
   </div>
@@ -78,7 +49,7 @@ let rABS = false; // 是否将文件读取为二进制字符串
 export default {
   name: "",
   props: [""],
-  data () {
+  data() {
     return {
       AdminRoles: permissionFun(),
       fullscreenLoading: false,
@@ -99,18 +70,18 @@ export default {
       }
     };
   },
-  mounted () {
+  mounted() {
     this.getGroupSpecif(); // 获取电池规格列表
     this.getSinglBattery(); // 获取电池单体型号列表
     this.getBatteryModelList(); // 获取电池型号列表
   },
 
   methods: {
-    resetIndex () {
+    resetIndex() {
       console.log('this.index', this.index);
       this.index = 0;
     },
-    fileUpload (event) {
+    fileUpload(event) {
       this.index += 1;
       if (this.index > 1) return;
       console.log(event);
@@ -198,7 +169,7 @@ export default {
         reader.readAsBinaryString(f);
       }
     },
-    ENuploadDataCheck (resultObj, self) {
+    ENuploadDataCheck(resultObj, self) {
       console.log('英文');
       let valuesObj = [];
       for (let i = 0; i < resultObj.length; i++) {
@@ -259,7 +230,7 @@ export default {
       }
       self.fileUploadTo(valuesObj, self);
     },
-    ZHuploadDataCheck (resultObj, self) {
+    ZHuploadDataCheck(resultObj, self) {
       console.log('中文');
       let valuesObj = [];
       for (let i = 0; i < resultObj.length; i++) {
@@ -322,7 +293,7 @@ export default {
       }
       self.fileUploadTo(valuesObj, self);
     },
-    fixdata (data) {
+    fixdata(data) {
       // 文件流转BinaryString
       let o = "";
       let l = 0;
@@ -337,7 +308,7 @@ export default {
       o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
       return o;
     },
-    fileUploadTo (data, self) {
+    fileUploadTo(data, self) {
       self.$api.batteryUpLoadAll(data).then(res => {
         console.log(res);
         self.fullscreenLoading = false;
@@ -353,14 +324,14 @@ export default {
         }
       });
     },
-    recovery () {
+    recovery() {
       this.$router.push("/battery/defriend");
     },
-    resetModelAdd () {
+    resetModelAdd() {
       this.$refs.modelForm.resetFields();
       this.modelForm = {};
     },
-    submitModelAdd () {
+    submitModelAdd() {
       console.log(this.batteryForm);
       this.$refs.modelForm.validate(valid => {
         if (valid) {
@@ -405,7 +376,7 @@ export default {
         }
       });
     },
-    handleCommand (command) {
+    handleCommand(command) {
       this.addType = command;
       // this.modelForm.value = "";
       if (command === "addBattery") {
@@ -429,7 +400,7 @@ export default {
       }
     },
     /* 获取电池型号列表 */
-    getBatteryModelList () {
+    getBatteryModelList() {
       this.$api.batteryModelList().then(res => {
         console.log("获取电池型号列表", res);
         if (res.data && res.data.code === 0) {
@@ -441,7 +412,7 @@ export default {
       });
     },
     /* 获取电池组规格列表 */
-    getGroupSpecif () {
+    getGroupSpecif() {
       this.$api.batteryGroupSpecif().then(res => {
         console.log("电池组规格", res);
         if (res.data && res.data.code === 0) {
@@ -453,7 +424,7 @@ export default {
       });
     },
     /* 获取电池单体型号列表 */
-    getSinglBattery () {
+    getSinglBattery() {
       this.$api.batterySingleModel().then(res => {
         console.log("电池单体型号", res);
         if (res.data && res.data.code === 0) {

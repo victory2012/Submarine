@@ -1,10 +1,11 @@
 // import _ from "lodash";
-import { deepClone } from '@/utils/functions';
+import {
+  deepClone
+} from '@/utils/functions';
 import permissionFun from '@/utils/valated';
 
 /* eslint-disable */
-const menu = [
-  {
+const menu = [{
     text: 'menu.overview', // 概览
     link: '/overview',
     icon: 'iconfont icon-allnormal'
@@ -13,12 +14,10 @@ const menu = [
     text: 'menu.batteryManage', // 电池管理
     link: '1',
     icon: 'iconfont icon-dashboard',
-    children: [
-      {
+    children: [{
         text: 'menu.batteryInfo', // 电池信息
         link: '11',
-        children: [
-          {
+        children: [{
             text: 'menu.batteryList', // 电池列表
             link: '/battery'
           },
@@ -46,12 +45,10 @@ const menu = [
     text: 'menu.setting', // 配置管理
     link: '2',
     icon: 'iconfont icon-seting',
-    children: [
-      {
+    children: [{
         text: 'menu.threshold', // 报警阈值
         link: '22',
-        children: [
-          {
+        children: [{
             text: 'menu.sortByModel', // 按电池型号分类
             link: '/set/model'
           },
@@ -64,8 +61,7 @@ const menu = [
       {
         text: 'menu.WarningNotice', // 告警通知
         link: '23',
-        children: [
-          {
+        children: [{
             text: 'menu.receiveList', // 告警接收人
             link: '/set/receive'
           },
@@ -90,8 +86,7 @@ const menu = [
     text: 'menu.device', // 设备管理
     link: '3',
     icon: 'iconfont icon-device',
-    children: [
-      {
+    children: [{
         text: 'menu.deviceList', // 设备列表
         link: '/device/list'
       },
@@ -139,12 +134,10 @@ const systemDefriend = {
   text: 'menu.system', // 系统管理
   icon: 'iconfont icon-system',
   link: '',
-  children: [
-    {
-      text: 'menu.repairGps', // gps修正
-      link: '/gps/repair'
-    }
-  ]
+  children: [{
+    text: 'menu.repairGps', // gps修正
+    link: '/gps/repair'
+  }]
 };
 listData2.push(systemDefriend);
 /* 生产企业 */

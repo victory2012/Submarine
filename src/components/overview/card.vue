@@ -69,7 +69,7 @@ export default {
   props: {
     cardData: {
       type: Object,
-      default: () => {}
+      default: () => { }
     }
   },
   data() {

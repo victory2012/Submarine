@@ -12,74 +12,42 @@
         <p>{{key.text}}</p>
       </div>
     </div> -->
-    <el-table v-loading="loading"
-      :data="tableData"
-      style="width: 100%">
+    <el-table v-loading="loading" :data="tableData" style="width: 100%">
       <!-- 用户名 -->
-      <el-table-column prop="account"
-        align="center"
-        :label="$t('useMsg.name')">
+      <el-table-column prop="account" align="center" :label="$t('useMsg.name')">
       </el-table-column>
       <!-- 昵称 -->
-      <el-table-column prop="nickName"
-        align="center"
-        :label="$t('useMsg.nickName')">
+      <el-table-column prop="nickName" align="center" :label="$t('useMsg.nickName')">
       </el-table-column>
       <!-- 账户身份 -->
-      <el-table-column prop="role"
-        align="center"
-        :label="$t('useMsg.accountRole')">
+      <el-table-column prop="role" align="center" :label="$t('useMsg.accountRole')">
       </el-table-column>
       <!-- 企业身份 -->
-      <el-table-column prop="layerName"
-        align="center"
-        :label="$t('useMsg.enterpriseRole')">
+      <el-table-column prop="layerName" align="center" :label="$t('useMsg.enterpriseRole')">
       </el-table-column>
       <!-- 企业名称 -->
-      <el-table-column prop="companyName"
-        align="center"
-        :label="$t('useMsg.enterpriseName')">
+      <el-table-column prop="companyName" align="center" :label="$t('useMsg.enterpriseName')">
       </el-table-column>
       <!-- 手机号码 -->
-      <el-table-column prop="phone"
-        align="center"
-        :label="$t('useMsg.phone')">
+      <el-table-column prop="phone" align="center" :label="$t('useMsg.phone')">
       </el-table-column>
       <!-- 邮箱 -->
-      <el-table-column prop="email"
-        align="center"
-        :label="$t('useMsg.email')"
-        width="240">
+      <el-table-column prop="email" align="center" :label="$t('useMsg.email')" width="240">
       </el-table-column>
       <!-- 操作 -->
-      <el-table-column align="center"
-        :label="$t('batteryList.handle')"
-        :width="width">
+      <el-table-column align="center" :label="$t('batteryList.handle')" :width="width">
         <template slot-scope="scope">
           <!-- 修改权限 -->
-          <el-button :disabled="!scope.row.userType"
-            size="small"
-            class="limite"
-            @click.native.prevent="changeQuanxian(scope.row)"
-            type="text">
+          <el-button :disabled="!scope.row.userType" size="small" class="limite" @click.native.prevent="changeQuanxian(scope.row)" type="text">
             {{$t('useMsg.changeRole')}}
           </el-button>
           <!-- 删除 -->
-          <el-button size="small"
-            type="text"
-            @click="secondary(scope.row)"
-            :disabled="!scope.row.canNotDelete">{{$t('timeBtn.del')}}</el-button>
+          <el-button size="small" type="text" @click="secondary(scope.row)" :disabled="!scope.row.canNotDelete">{{$t('timeBtn.del')}}</el-button>
         </template>
       </el-table-column>
     </el-table>
     <div class="page">
-      <el-pagination @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page.sync="currentPage"
-        :page-sizes="[10, 20, 30, 50]"
-        :page-size="pageSize"
-        layout="sizes, prev, pager, next"
-        :total="total">
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-sizes="[10, 20, 30, 50]" :page-size="pageSize" layout="sizes, prev, pager, next" :total="total">
       </el-pagination>
     </div>
     <!-- <Manfictors @hasCreated="reloadData"
@@ -88,14 +56,10 @@
       :type="addType"></Custom> -->
     <!-- 权限 -->
     <div>
-      <el-dialog :title="$t('useMsg.changeRole')"
-        width="600px"
-        :visible.sync="jurisdiction">
+      <el-dialog :title="$t('useMsg.changeRole')" width="600px" :visible.sync="jurisdiction">
         <div>
           <ul class="jurisdiction-warrp">
-            <li v-for="key in userRole"
-              :key="key.id"
-              class="jurisdiction-itme">
+            <li v-for="key in userRole" :key="key.id" class="jurisdiction-itme">
               <div class="pre">{{key.label}}</div>
               <div class="pre">
                 <el-checkbox v-model="key.value"></el-checkbox>
@@ -103,14 +67,10 @@
             </li>
           </ul>
         </div>
-        <div slot="footer"
-          class="dialog-footer">
+        <div slot="footer" class="dialog-footer">
           <!-- 取消 -->
-          <el-button size="small"
-            @click="jurisdiction = false">{{$t('timeBtn.cancle')}}</el-button>
-          <el-button size="small"
-            type="primary"
-            @click="doChangeJur">{{$t('timeBtn.sure')}}</el-button>
+          <el-button size="small" @click="jurisdiction = false">{{$t('timeBtn.cancle')}}</el-button>
+          <el-button size="small" type="primary" @click="doChangeJur">{{$t('timeBtn.sure')}}</el-button>
           <!-- 确定 -->
         </div>
       </el-dialog>
@@ -135,7 +95,7 @@ export default {
     // Custom,
     adduserInfo
   },
-  data () {
+  data() {
     return {
       width: localStorage.getItem('locale') === 'en' ? 230 : 150,
       AdminRoles: permissionFun(),
@@ -189,13 +149,13 @@ export default {
       ]
     };
   },
-  mounted () {
+  mounted() {
     this.storge = JSON.parse(utils.getStorage("loginData"));
     this.getUserList();
   },
   methods: {
     /* 删除按钮 */
-    secondary (item) {
+    secondary(item) {
       console.log(item);
       if (item.type === 2) {
         this.deleteAdmin(item);
@@ -205,7 +165,7 @@ export default {
       }
     },
     /* 删除用户 */
-    deleteUser (item) {
+    deleteUser(item) {
       // 此操作将删除该用户, 是否继续?
       this.$messageBox
         .confirm(`${t('useMsg.delUserWarn')}`, `${t('loginMsg.tips')}`, {
@@ -229,7 +189,7 @@ export default {
         });
     },
     /* 刪除企业 */
-    deleteAdmin (item) {
+    deleteAdmin(item) {
       // 此操作将删除该企业以及该企业下的所有用户, 是否继续?
       this.$messageBox
         .confirm(
@@ -255,7 +215,7 @@ export default {
         });
     },
     /* 修改权限 -- 按钮 */
-    changeQuanxian (item) {
+    changeQuanxian(item) {
       if (
         (item.type === 2 && item.layerName === "生产企业") ||
         (item.type === 3 && item.layerName === "生产企业")
@@ -315,7 +275,7 @@ export default {
       });
     },
     /* 修改权限 -- 方法 */
-    doChangeJur () {
+    doChangeJur() {
       let permission = {};
       this.userRole.forEach(key => {
         permission[key.id] = key.value;
@@ -335,19 +295,19 @@ export default {
         }
       });
     },
-    handleSizeChange (val) {
+    handleSizeChange(val) {
       console.log(val);
       this.pageSize = val;
       this.getUserList();
     },
-    handleCurrentChange (val) {
+    handleCurrentChange(val) {
       this.currentPage = val;
       this.getUserList();
     },
-    reloadData (data) {
+    reloadData(data) {
       this.getUserList();
     },
-    getUserList () {
+    getUserList() {
       this.loading = true;
       let pageObj = {
         pageSize: this.pageSize,

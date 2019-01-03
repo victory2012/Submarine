@@ -1,67 +1,43 @@
 <template>
-  <el-dialog width="600px"
-    :title="userText"
-    @close="closedIt"
-    :visible.sync="manfictor">
-    <el-form :model="adminForm"
-      :rules="customerRules"
-      ref="adminForm">
+  <el-dialog width="600px" :title="userText" @close="closedIt" :visible.sync="manfictor">
+    <el-form :model="adminForm" :rules="customerRules" ref="adminForm">
       <el-row :gutter="40">
         <el-col :span="12">
-          <el-form-item :label="$t('useMsg.name')"
-            prop="account">
-            <el-input size="small"
-              v-model="adminForm.account"
-              auto-complete="off"></el-input>
+          <el-form-item :label="$t('useMsg.name')" prop="account">
+            <el-input size="small" v-model="adminForm.account" auto-complete="off"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item :label="$t('useMsg.loginPwd')"
-            prop="password">
-            <el-input size="small"
-              v-model="adminForm.password"
-              type="password"
-              auto-complete="off"></el-input>
+          <el-form-item :label="$t('useMsg.loginPwd')" prop="password">
+            <el-input size="small" v-model="adminForm.password" type="password" auto-complete="off"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
       <el-row :gutter="40">
         <el-col :span="12">
-          <el-form-item :label="$t('useMsg.phone')"
-            prop="phone">
-            <el-input size="small"
-              v-model="adminForm.phone"
-              auto-complete="off"></el-input>
+          <el-form-item :label="$t('useMsg.phone')" prop="phone">
+            <el-input size="small" v-model="adminForm.phone" auto-complete="off"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item :label="$t('useMsg.email')"
-            prop="email">
-            <el-input size="small"
-              v-model="adminForm.email"
-              auto-complete="off"></el-input>
+          <el-form-item :label="$t('useMsg.email')" prop="email">
+            <el-input size="small" v-model="adminForm.email" auto-complete="off"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
       <el-row :gutter="40">
         <el-col :span="12">
-          <el-form-item :label="$t('useMsg.enterpriseName')"
-            prop="companyName">
-            <el-input size="small"
-              v-model="adminForm.companyName"
-              auto-complete="off"></el-input>
+          <el-form-item :label="$t('useMsg.enterpriseName')" prop="companyName">
+            <el-input size="small" v-model="adminForm.companyName" auto-complete="off"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
     </el-form>
     <div>
     </div>
-    <div slot="footer"
-      class="dialog-footer">
+    <div slot="footer" class="dialog-footer">
       <el-button @click="resetAdmin('adminForm')">{{$t('timeBtn.reset')}}</el-button>
-      <el-button :loading="addadmin"
-        @click="submitAdmin('adminForm')"
-        type="primary">{{$t('timeBtn.sure')}}</el-button>
+      <el-button :loading="addadmin" @click="submitAdmin('adminForm')" type="primary">{{$t('timeBtn.sure')}}</el-button>
     </div>
   </el-dialog>
 </template>
@@ -77,7 +53,7 @@ export default {
       required: true
     }
   },
-  data () {
+  data() {
     return {
       addadmin: false,
       creatAdmin: true,
@@ -134,15 +110,15 @@ export default {
       set: function () { }
     }
   },
-  mounted () {
+  mounted() {
     // this.userText = sessionStorage.getItem("useItem");
   },
   methods: {
-    resetAdmin (formName) {
+    resetAdmin(formName) {
       this.$refs[formName].resetFields();
       this.adminForm = {};
     },
-    submitAdmin (formName) {
+    submitAdmin(formName) {
       console.log(this.typeId);
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -199,7 +175,7 @@ export default {
         }
       });
     },
-    closedIt () {
+    closedIt() {
       console.log("it closed");
       this.$store.state.manfictor = false;
       this.addadmin = false;

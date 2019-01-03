@@ -1,51 +1,29 @@
 <template>
   <div>
-    <div v-if="manufacturerName"
-      class="items"
-      @click="regDialog">
-      <img src="../../../static/img/device_reg.png"
-        alt="">
+    <div v-if="manufacturerName" class="items" @click="regDialog">
+      <img src="../../../static/img/device_reg.png" alt="">
       <p>{{$t('device.regDevice')}}</p>
       <!-- 设备注册 -->
     </div>
-    <div v-if="manufacturerName"
-      class="items"
-      @click="resetIndex"
-      style="position: relative">
-      <input class="fileUpload"
-        type="file"
-        @change="fileUpload"
-        v-loading.fullscreen.lock="fullscreenLoading" />
-      <img src="../../../static/img/device_import.png"
-        alt="">
+    <div v-if="manufacturerName" class="items" @click="resetIndex" style="position: relative">
+      <input class="fileUpload" type="file" @change="fileUpload" v-loading.fullscreen.lock="fullscreenLoading" />
+      <img src="../../../static/img/device_import.png" alt="">
       <p>{{$t('batteryList.batchImport')}}</p>
       <!-- 批量导入 -->
     </div>
-    <div v-if="manufacturerName"
-      class="items">
+    <div v-if="manufacturerName" class="items">
       <router-link to="/device/defriend">
-        <img src="../../../static/img/device_recover.png"
-          alt="">
+        <img src="../../../static/img/device_recover.png" alt="">
         <p>{{$t('menu.defriend')}}</p>
         <!-- 恢复拉黑设备 -->
       </router-link>
     </div>
     <!-- 设备注册 -->
-    <el-dialog :title="$t('device.regDevice')"
-      width="600px"
-      :visible.sync="regDevice">
-      <el-form :model="regform"
-        :rules="regRules"
-        ref="regform">
+    <el-dialog :title="$t('device.regDevice')" width="600px" :visible.sync="regDevice">
+      <el-form :model="regform" :rules="regRules" ref="regform">
         <!-- 设备编号 -->
-        <el-form-item prop="name"
-          :label="$t('device.deviceCode')"
-          label-width="150px">
-          <el-input style="width:200px;"
-            size="small"
-            v-model.trim="regform.name"
-            :placeholder="$t('device.deviceCode')"
-            auto-complete="off"></el-input>
+        <el-form-item prop="name" :label="$t('device.deviceCode')" label-width="150px">
+          <el-input style="width:200px;" size="small" v-model.trim="regform.name" :placeholder="$t('device.deviceCode')" auto-complete="off"></el-input>
         </el-form-item>
         <!-- <el-form-item prop="deviceType"
           :label="$t('device.deviceCategory')"
@@ -62,28 +40,15 @@
           </el-select>
         </el-form-item> -->
         <!-- 相关企业 -->
-        <el-form-item prop="company"
-          :label="$t('device.company')"
-          :label-width=" '150px' ">
-          <el-select style="width:200px;"
-            size="small"
-            v-model="regform.company "
-            :placeholder="$t('device.company')">
-            <el-option v-for="item in COMPANYARRAY"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id"></el-option>
+        <el-form-item prop="company" :label="$t('device.company')" :label-width=" '150px' ">
+          <el-select style="width:200px;" size="small" v-model="regform.company " :placeholder="$t('device.company')">
+            <el-option v-for="item in COMPANYARRAY" :key="item.id" :label="item.name" :value="item.id"></el-option>
           </el-select>
         </el-form-item>
       </el-form>
-      <div slot="footer"
-        class="dialog-footer">
-        <el-button size="small"
-          @click="resetRegform('regform')">{{$t('timeBtn.cancle')}}</el-button>
-        <el-button :loading="createDevice"
-          size="small"
-          type="primary "
-          @click="submitRegForm('regform')">{{$t('timeBtn.sure')}}</el-button>
+      <div slot="footer" class="dialog-footer">
+        <el-button size="small" @click="resetRegform('regform')">{{$t('timeBtn.cancle')}}</el-button>
+        <el-button :loading="createDevice" size="small" type="primary " @click="submitRegForm('regform')">{{$t('timeBtn.sure')}}</el-button>
       </div>
     </el-dialog>
   </div>
@@ -99,7 +64,7 @@ import t from "@/utils/translate";
 let wb; // 读取完成的数据
 let rABS = false; // 是否将文件读取为二进制字符串
 export default {
-  data () {
+  data() {
     return {
       manufacturerName: false,
       regDevice: false,
@@ -123,7 +88,7 @@ export default {
   computed: {
     ...mapGetters(["COMPANYARRAY"])
   },
-  mounted () {
+  mounted() {
     this.storge = JSON.parse(utils.getStorage("loginData"));
     if (this.storge.type === 1) {
       this.manufacturerName = true;
@@ -151,11 +116,11 @@ export default {
     //     }
     //   });
     // },
-    resetRegform (form) {
+    resetRegform(form) {
       this.regDevice = false;
       this.$refs[form].resetFields();
     },
-    submitRegForm (form) {
+    submitRegForm(form) {
       this.$refs[form].validate(valid => {
         if (valid) {
           this.createDevice = true;
@@ -197,14 +162,14 @@ export default {
         }
       });
     },
-    regDialog () {
+    regDialog() {
       this.regDevice = true;
     },
-    resetIndex () {
+    resetIndex() {
       console.log('this.index', this.index);
       this.index = 0;
     },
-    fileUpload (event) {
+    fileUpload(event) {
       console.log(event);
       this.index += 1;
       if (this.index > 1) return;
@@ -291,7 +256,7 @@ export default {
         reader.readAsBinaryString(f);
       }
     },
-    ENuploadDataCheck (resultObj, self) {
+    ENuploadDataCheck(resultObj, self) {
       let valuesObj = [];
       for (let i = 0; i < resultObj.length; i++) {
         let results = resultObj[i];
@@ -322,7 +287,7 @@ export default {
       // console.log(valuesObj);
       self.fileUploadTo(valuesObj, self);
     },
-    ZHuploadDataCheck (resultObj, self) {
+    ZHuploadDataCheck(resultObj, self) {
       let valuesObj = [];
       for (let i = 0; i < resultObj.length; i++) {
         let results = resultObj[i];
@@ -355,7 +320,7 @@ export default {
       // console.log(valuesObj);
       self.fileUploadTo(valuesObj, self);
     },
-    fixdata (data) {
+    fixdata(data) {
       // 文件流转BinaryString
       let o = "";
       let l = 0;
@@ -370,7 +335,7 @@ export default {
       o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
       return o;
     },
-    fileUploadTo (data, self) {
+    fileUploadTo(data, self) {
       console.log('fileUploadTo', data);
       console.log('fileUploadTo self', self);
       self.$api.deviceBatchAdd(data).then(res => {

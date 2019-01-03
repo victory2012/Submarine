@@ -1,38 +1,19 @@
 <template>
-  <el-dialog width="600px"
-    :title="$t('batteryList.batteryAddBtn')"
-    @close="closeTt"
-    top="50px"
-    :visible.sync="addBattery">
+  <el-dialog width="600px" :title="$t('batteryList.batteryAddBtn')" @close="closeTt" top="50px" :visible.sync="addBattery">
     <!-- 电池登记 -->
-    <el-form :model="batteryForm"
-      :rules="batteryFormRules"
-      ref="batteryForm">
+    <el-form :model="batteryForm" :rules="batteryFormRules" ref="batteryForm">
       <el-row :gutter="60">
         <el-col :span="12">
           <!-- 生产企业 -->
-          <el-form-item :label="$t('batteryList.enterprise')"
-            prop="account">
-            <el-input size="small"
-              disabled
-              v-model="account"
-              auto-complete="off"
-              style="width:210px;"></el-input>
+          <el-form-item :label="$t('batteryList.enterprise')" prop="account">
+            <el-input size="small" disabled v-model="account" auto-complete="off" style="width:210px;"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <!-- 电池组客户企业 -->
-          <el-form-item :label="$t('batteryList.customer')"
-            prop="batCustom">
-            <el-select size="small"
-              style="width:210px"
-              v-model="batteryForm.batCustom"
-              :placeholder="$t('batteryList.customer')">
-              <el-option v-for="item in getCustomOpts"
-                :key="item.id"
-                :label="item.name"
-                :value="item.id"
-                :disabled="item.disabled">
+          <el-form-item :label="$t('batteryList.customer')" prop="batCustom">
+            <el-select size="small" style="width:210px" v-model="batteryForm.batCustom" :placeholder="$t('batteryList.customer')">
+              <el-option v-for="item in getCustomOpts" :key="item.id" :label="item.name" :value="item.id" :disabled="item.disabled">
               </el-option>
             </el-select>
           </el-form-item>
@@ -41,26 +22,15 @@
       <el-row :gutter="60">
         <el-col :span="12">
           <!-- 电池组编号 -->
-          <el-form-item :label="$t('batteryList.batteryCode')"
-            prop="groupNum">
-            <el-input size="small"
-              v-model.trim="batteryForm.groupNum"
-              style="width:210px;"
-              :placeholder="$t('batteryList.batteryCode')"></el-input>
+          <el-form-item :label="$t('batteryList.batteryCode')" prop="groupNum">
+            <el-input size="small" v-model.trim="batteryForm.groupNum" style="width:210px;" :placeholder="$t('batteryList.batteryCode')"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <!-- 电池组型号 -->
-          <el-form-item :label="$t('batteryList.model')"
-            prop="batGroupModel">
-            <el-select size="small"
-              style="width:210px"
-              v-model="batteryForm.batGroupModel"
-              :placeholder="$t('batteryList.model')">
-              <el-option v-for="item in getGroupModelOpts"
-                :key="item.id"
-                :label="item.dicKey"
-                :value="item.id">
+          <el-form-item :label="$t('batteryList.model')" prop="batGroupModel">
+            <el-select size="small" style="width:210px" v-model="batteryForm.batGroupModel" :placeholder="$t('batteryList.model')">
+              <el-option v-for="item in getGroupModelOpts" :key="item.id" :label="item.dicKey" :value="item.id">
               </el-option>
             </el-select>
           </el-form-item>
@@ -69,56 +39,32 @@
       <el-row :gutter="60">
         <el-col :span="12">
           <!-- 电池组规格 -->
-          <el-form-item :label="$t('batteryList.specif')"
-            prop="batGroupSpecif">
-            <el-select size="small"
-              style="width:210px"
-              v-model="batteryForm.batGroupSpecif"
-              :placeholder="$t('batteryList.specif')">
-              <el-option v-for="item in getBatGroupSpecifOpts"
-                :key="item.id"
-                :label="item.dicKey"
-                :value="item.id">
+          <el-form-item :label="$t('batteryList.specif')" prop="batGroupSpecif">
+            <el-select size="small" style="width:210px" v-model="batteryForm.batGroupSpecif" :placeholder="$t('batteryList.specif')">
+              <el-option v-for="item in getBatGroupSpecifOpts" :key="item.id" :label="item.dicKey" :value="item.id">
               </el-option>
             </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <!-- 电池组额定电压 -->
-          <el-form-item :label="$t('batteryList.batteryVoltage')"
-            prop="batteryVoltage">
-            <el-input size="small"
-              v-model="batteryForm.batteryVoltage"
-              style="width:210px;"
-              @keyup.native="proving"
-              :placeholder="$t('batteryList.batteryVoltage')"></el-input>
+          <el-form-item :label="$t('batteryList.batteryVoltage')" prop="batteryVoltage">
+            <el-input size="small" v-model="batteryForm.batteryVoltage" style="width:210px;" @keyup.native="proving" :placeholder="$t('batteryList.batteryVoltage')"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
       <el-row :gutter="60">
         <el-col :span="12">
           <!-- 电池组额定容量 -->
-          <el-form-item :label="$t('batteryList.batteryCapacity')"
-            prop="batteryCapacity">
-            <el-input size="small"
-              v-model="batteryForm.batteryCapacity"
-              style="width:210px;"
-              @keyup.native="proving1"
-              :placeholder="$t('batteryList.batteryCapacity')"></el-input>
+          <el-form-item :label="$t('batteryList.batteryCapacity')" prop="batteryCapacity">
+            <el-input size="small" v-model="batteryForm.batteryCapacity" style="width:210px;" @keyup.native="proving1" :placeholder="$t('batteryList.batteryCapacity')"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <!-- 电池单体型号 -->
-          <el-form-item :label="$t('batteryList.singleBattery')"
-            prop="singleBattery">
-            <el-select size="small"
-              style="width:210px"
-              v-model="batteryForm.singleBattery"
-              :placeholder="$t('batteryList.singleBattery')">
-              <el-option v-for="item in getSingleBatteryOpts"
-                :key="item.id"
-                :label="item.dicKey"
-                :value="item.id">
+          <el-form-item :label="$t('batteryList.singleBattery')" prop="singleBattery">
+            <el-select size="small" style="width:210px" v-model="batteryForm.singleBattery" :placeholder="$t('batteryList.singleBattery')">
+              <el-option v-for="item in getSingleBatteryOpts" :key="item.id" :label="item.dicKey" :value="item.id">
               </el-option>
             </el-select>
           </el-form-item>
@@ -127,28 +73,15 @@
       <el-row :gutter="60">
         <el-col :span="12">
           <!-- 电池组生产日期 -->
-          <el-form-item :label="$t('batteryList.createDate')"
-            prop="productDate">
-            <el-date-picker size="small"
-              style="width: 210px"
-              value-format="yyyy-MM-dd"
-              v-model="batteryForm.productDate"
-              type="date"
-              :placeholder="$t('batteryList.createDate')">
+          <el-form-item :label="$t('batteryList.createDate')" prop="productDate">
+            <el-date-picker size="small" style="width: 210px" value-format="yyyy-MM-dd" v-model="batteryForm.productDate" type="date" :placeholder="$t('batteryList.createDate')">
             </el-date-picker>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <!-- 电池组出厂日期 -->
-          <el-form-item :label="$t('batteryList.manufactureDate')"
-            :error="manufactureDateError"
-            prop="factoryDate">
-            <el-date-picker size="small"
-              style="width: 210px"
-              value-format="yyyy-MM-dd"
-              v-model="batteryForm.factoryDate"
-              type="date"
-              :placeholder="$t('batteryList.manufactureDate')">
+          <el-form-item :label="$t('batteryList.manufactureDate')" :error="manufactureDateError" prop="factoryDate">
+            <el-date-picker size="small" style="width: 210px" value-format="yyyy-MM-dd" v-model="batteryForm.factoryDate" type="date" :placeholder="$t('batteryList.manufactureDate')">
             </el-date-picker>
           </el-form-item>
         </el-col>
@@ -156,31 +89,16 @@
       <el-row :gutter="60">
         <el-col :span="12">
           <!-- 电池组质保期 -->
-          <el-form-item :label="$t('batteryList.warrantyDate')"
-            :error="warrantyDateError"
-            prop="qualityDate">
-            <el-date-picker size="small"
-              style="width: 210px"
-              value-format="yyyy-MM-dd"
-              v-model="batteryForm.qualityDate"
-              type="date"
-              :placeholder="$t('batteryList.warrantyDate')">
+          <el-form-item :label="$t('batteryList.warrantyDate')" :error="warrantyDateError" prop="qualityDate">
+            <el-date-picker size="small" style="width: 210px" value-format="yyyy-MM-dd" v-model="batteryForm.qualityDate" type="date" :placeholder="$t('batteryList.warrantyDate')">
             </el-date-picker>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <!-- 监测设备编号（选填） -->
-          <el-form-item :label="$t('batteryList.choseDevice')"
-            prop="deviceId">
-            <el-select size="small"
-              style="width:210px"
-              v-model="batteryForm.deviceId"
-              :placeholder="$t('batteryList.deviceCode')">
-              <el-option v-for="item in getDeviceIdOpts"
-                :key="item.code"
-                :label="item.code"
-                :value="item.id"
-                :disabled="item.disabled">
+          <el-form-item :label="$t('batteryList.choseDevice')" prop="deviceId">
+            <el-select size="small" style="width:210px" v-model="batteryForm.deviceId" :placeholder="$t('batteryList.deviceCode')">
+              <el-option v-for="item in getDeviceIdOpts" :key="item.code" :label="item.code" :value="item.id" :disabled="item.disabled">
               </el-option>
             </el-select>
           </el-form-item>
@@ -189,14 +107,10 @@
     </el-form>
     <div>
     </div>
-    <div slot="footer"
-      class="dialog-footer">
+    <div slot="footer" class="dialog-footer">
       <!-- 重 置 -->
-      <el-button size="small"
-        @click="resetBatteryAdd">{{$t('timeBtn.reset')}}</el-button>
-      <el-button size="small"
-        @click="submitBatteryAdd"
-        type="primary">{{$t('timeBtn.sure')}}</el-button>
+      <el-button size="small" @click="resetBatteryAdd">{{$t('timeBtn.reset')}}</el-button>
+      <el-button size="small" @click="submitBatteryAdd" type="primary">{{$t('timeBtn.sure')}}</el-button>
       <!-- 确认 -->
     </div>
   </el-dialog>
@@ -209,7 +123,7 @@ import utils from "@/utils/utils";
 import t from "@/utils/translate";
 
 export default {
-  data () {
+  data() {
     return {
       manufactureDateError: '',
       warrantyDateError: '',
@@ -317,20 +231,20 @@ export default {
     }
   },
   methods: {
-    resetBatteryAdd () {
+    resetBatteryAdd() {
       this.$refs.batteryForm.resetFields();
       this.batteryForm = {};
     },
-    getTime (date) {
+    getTime(date) {
       return new Date(date).getTime();
     },
-    proving () {
+    proving() {
       this.batteryForm.batteryVoltage = this.batteryForm.batteryVoltage.replace(/[^\.\d]/g, '');
     },
-    proving1 () {
+    proving1() {
       this.batteryForm.batteryCapacity = this.batteryForm.batteryCapacity.replace(/[^\.\d]/g, '');
     },
-    submitBatteryAdd () {
+    submitBatteryAdd() {
       this.$refs.batteryForm.validate(valid => {
         if (valid) {
           if (this.getTime(this.batteryForm.factoryDate) < this.getTime(this.batteryForm.productDate)) {
@@ -402,7 +316,7 @@ export default {
       });
     },
     /* 关闭窗口回调方法 */
-    closeTt () {
+    closeTt() {
       this.$refs.batteryForm.resetFields();
       this.batteryForm = {};
       this.$store.state.addBattery = false;

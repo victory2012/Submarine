@@ -4,38 +4,23 @@
       <!-- <div class="item tips">手机号码:</div> -->
       <div class="item tips"></div>
       <div class="item input">
-        <el-form :model="validateForm"
-          :rules="rules"
-          ref="validateForm"
-          label-width="100px"
-          class="demo-ruleForm">
+        <el-form :model="validateForm" :rules="rules" ref="validateForm" label-width="100px" class="demo-ruleForm">
           <!-- 手机号码 -->
-          <el-form-item :label="$t('useMsg.phone')"
-            prop="input">
-            <el-input type="tel"
-              size="small"
-              v-model.number="validateForm.input"
-              auto-complete="off"
-              :placeholder="$t('user.phone')"></el-input>
+          <el-form-item :label="$t('useMsg.phone')" prop="input">
+            <el-input type="tel" size="small" v-model.number="validateForm.input" auto-complete="off" :placeholder="$t('user.phone')"></el-input>
           </el-form-item>
         </el-form>
       </div>
       <div class="item">
-        <el-button @click="addPerson"
-          size="small"
-          type="primary">{{$t('notice.add')}}</el-button>
+        <el-button @click="addPerson" size="small" type="primary">{{$t('notice.add')}}</el-button>
         <!-- 添加 -->
       </div>
     </div>
     <div class="more">{{$t('notice.outerMost')}}</div>
     <div>
       <ul>
-        <li class="tabletr"
-          v-for="key in dataArr"
-          :key="key.id">
-          <el-row type="flex"
-            class="row-bg"
-            justify="center">
+        <li class="tabletr" v-for="key in dataArr" :key="key.id">
+          <el-row type="flex" class="row-bg" justify="center">
             <el-col :span="6">
               <div class="grid">{{key.contactWay}}</div>
             </el-col>
@@ -44,9 +29,7 @@
             </el-col>
             <el-col :span="6">
               <div style="padding-left: 80px;">
-                <el-button @click="cancelReceive(key)"
-                  size="small"
-                  type="primary">{{$t('timeBtn.del')}}</el-button>
+                <el-button @click="cancelReceive(key)" size="small" type="primary">{{$t('timeBtn.del')}}</el-button>
               </div>
             </el-col>
           </el-row>
@@ -59,7 +42,7 @@
 import t from "@/utils/translate";
 
 export default {
-  data () {
+  data() {
     return {
       input: "",
       dataArr: [],
@@ -77,7 +60,7 @@ export default {
     };
   },
   methods: {
-    addPerson () {
+    addPerson() {
       if (this.dataArr.length > 2) return;
       this.$refs.validateForm.validate(valid => {
         if (valid) {
@@ -100,7 +83,7 @@ export default {
       });
     },
     /* 取消接收 */
-    cancelReceive (key) {
+    cancelReceive(key) {
       console.log(key);
       this.$api.cancelOuterUsers(key.id).then(res => {
         console.log(res);
@@ -113,7 +96,7 @@ export default {
         }
       });
     },
-    getList () {
+    getList() {
       let pageObj = {
         pageNum: 1,
         pageSize: 10
@@ -130,7 +113,7 @@ export default {
       });
     }
   },
-  mounted () {
+  mounted() {
     this.getList();
   }
 };

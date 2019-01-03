@@ -18,37 +18,26 @@
         </el-dropdown>
       </div> -->
       <div class="log">
-        <el-dropdown size="small"
-          placement="bottom"
-          class="user-name"
-          @command="handleCommand">
+        <el-dropdown size="small" placement="bottom" class="user-name" @command="handleCommand">
           <span class="el-dropdown-link">
             <span class="avatar">
               <i class="iconfont icon-user"></i>
             </span>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item v-if="AdminRoles.personalInfo"
-              command="userMsg">
+            <el-dropdown-item v-if="AdminRoles.personalInfo" command="userMsg">
               <i class="iconfont icon-user"></i>{{$t('userInfo.userMsg')}}
             </el-dropdown-item>
-            <el-dropdown-item divided
-              command="userPwd">
+            <el-dropdown-item divided command="userPwd">
               <i class="el-icon-setting"></i>{{$t('userInfo.pasword')}}</el-dropdown-item>
-            <el-dropdown-item divided
-              command="loginout">
+            <el-dropdown-item divided command="loginout">
               <i class="iconfont icon-logout"></i>{{$t('userInfo.logOut')}}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
         <p>{{loginData.nickName}}</p>
         <p>{{loginData.companyName}}</p>
       </div>
-      <el-menu class="sidebar-el-menu"
-        :default-active="$route.path"
-        background-color="#404040"
-        text-color="rgba(255, 255, 255, 0.67)"
-        :unique-opened='true'
-        router>
+      <el-menu class="sidebar-el-menu" :default-active="$route.path" background-color="#404040" text-color="rgba(255, 255, 255, 0.67)" :unique-opened='true' router>
         <MenuTree :menuData="this.menus.data"></MenuTree>
       </el-menu>
     </div>
@@ -71,7 +60,7 @@ import { getManifactor, getManifactorCus, getPlat, purchaseAdmin, purchaseCus } 
 import permissionFun from "@/utils/valated";
 
 export default {
-  data () {
+  data() {
     return {
       // loginData: '',
       menuData: '',
@@ -90,14 +79,14 @@ export default {
       loginData: 'getUserData'
     })
   },
-  mounted () {
+  mounted() {
     // let loginData = sessionStorage.getItem("loginData");
     // this.loginData = loginData ? JSON.parse(loginData) : {}
     this.AdminRoles = permissionFun();
     this.switchMenu(this.loginData);
   },
   methods: {
-    handleCommand (command) {
+    handleCommand(command) {
       if (command === "loginout") {
         this.$api.logOut().then(res => {
           if (res.data && res.data.code === 0) {
@@ -115,7 +104,7 @@ export default {
         this.$router.push("/user-pwd");
       }
     },
-    switchMenu (getUserType) {
+    switchMenu(getUserType) {
       // let menuData;
       if (
         getUserType.type === 1 ||
@@ -148,7 +137,7 @@ export default {
       this.menus.permissions = copyData.permissions;
       utils.setStorage("permissions", JSON.stringify(this.menus.permissions));
     },
-    eachMenus (data) {
+    eachMenus(data) {
       data.forEach(key => {
         if (typeof key === "object") {
           key.text = t(key.text);
@@ -159,7 +148,7 @@ export default {
       });
       return data
     },
-    langugeHandleChange (cammand) {
+    langugeHandleChange(cammand) {
       if (cammand === "zh") {
         this.localLanguge = "中文";
         this.$i18n.locale = "zh";
@@ -174,7 +163,7 @@ export default {
       this.menus.data = this.eachMenus(copyData2.data);
     }
   },
-  beforeDestroy () {
+  beforeDestroy() {
     this.menus = {};
     this.$store.state.loginData = "";
   }

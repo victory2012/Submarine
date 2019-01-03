@@ -5,16 +5,12 @@
       <el-button type="primary" icon="el-icon-circle-plus-outline"></el-button>
     </div> -->
     <div class="chartWarrp">
-      <div class="chartInfo"
-        id="echart1"></div>
-      <div class="chartInfo"
-        id="echart2"></div>
+      <div class="chartInfo" id="echart1"></div>
+      <div class="chartInfo" id="echart2"></div>
     </div>
     <div class="chartWarrp">
-      <div class="chartInfo"
-        id="echart3"></div>
-      <div class="chartInfo"
-        id="echart4"></div>
+      <div class="chartInfo" id="echart3"></div>
+      <div class="chartInfo" id="echart4"></div>
     </div>
   </div>
 </template>
@@ -40,7 +36,7 @@ export default {
       default: () => { }
     }
   },
-  data () {
+  data() {
     return {
       timeArr: [],
       singleVoltage: [],
@@ -51,7 +47,7 @@ export default {
       isOptionAbnormal: false
     };
   },
-  mounted () {
+  mounted() {
     this.init();
   },
   watch: {
@@ -70,7 +66,7 @@ export default {
     }
   },
   methods: {
-    init () {
+    init() {
       let $echartsDOM1 = document.getElementById("echart1");
       let $echartsDOM2 = document.getElementById("echart2");
       let $echartsDOM3 = document.getElementById("echart3");
@@ -96,7 +92,7 @@ export default {
       };
       this.dataChange(this.chartData);
     },
-    dataChange (datas) {
+    dataChange(datas) {
       let voltageOptions = deepClone(options);
       voltageOptions.title.text = t("realTime.voltage");
       voltageOptions.yAxis.axisLabel.formatter = "{value} v";
@@ -157,7 +153,7 @@ export default {
       };
       this.myEcharts4.setOption(temperatureOptions);
     },
-    formatter (data) {
+    formatter(data) {
       this.chartData.voltage.shift();
       this.chartData.singleVoltage.shift();
       this.chartData.current.shift();

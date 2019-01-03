@@ -83,7 +83,7 @@ export default {
       }
     }
   },
-  data () {
+  data() {
     return {
       timeArr: [],
       singleVoltage: [],
@@ -119,11 +119,11 @@ export default {
       deep: true
     }
   },
-  mounted () {
+  mounted() {
     this.init();
   },
   methods: {
-    init () {
+    init() {
       let $echartsDOM1 = document.getElementById("echart1");
       let $echartsDOM2 = document.getElementById("echart2");
       let $echartsDOM3 = document.getElementById("echart3");
@@ -180,7 +180,7 @@ export default {
         last: {}
       });
     },
-    showLoading (curVal) {
+    showLoading(curVal) {
       if (curVal) {
         this.lineEcharts1.showLoading();
         this.lineEcharts2.showLoading();
@@ -203,7 +203,7 @@ export default {
         this.lineEcharts5.hideLoading();
       }
     },
-    dataChange (datas) {
+    dataChange(datas) {
       // console.log(datas);
       this.exportData = datas;
       let name1;
@@ -385,7 +385,7 @@ export default {
       }
       this.lineEcharts5.setOption(capacity);
     },
-    barDataChange (datas) {
+    barDataChange(datas) {
       // console.log(datas);legend
       let name1;
       let name2;
@@ -486,7 +486,7 @@ export default {
       ];
       this.myBarEcharts4.setOption(temperatureBarOptions);
     },
-    barTime (datas) {
+    barTime(datas) {
       let chargeTimesOption = deepClone(BarOptions);
       chargeTimesOption.title.text = `${t('comparison.charageSituation')}`; //"充电情况";
       chargeTimesOption.xAxis[0].data = [`${t('comparison.charageTimes')}`]; // ["充电次数"];
@@ -502,7 +502,7 @@ export default {
       this.berCharts2.setOption(DsiChargeTimesOption);
     },
     /* 导出 Excel */
-    exportExcel () {
+    exportExcel() {
       let storage = JSON.parse(utils.getStorage("loginData"));
       let arr = [
         [`${t('history.makeTime')}`, new Date()], // 制表时间

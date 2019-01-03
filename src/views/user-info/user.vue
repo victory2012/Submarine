@@ -2,15 +2,10 @@
   <div class="userMsg">
     <div class="editorBtn">
       <!-- 编辑 -->
-      <el-button size="small"
-        type="primary"
-        @click="openEdit"
-        class="editorContent">{{$t('user.edit')}}</el-button>
+      <el-button size="small" type="primary" @click="openEdit" class="editorContent">{{$t('user.edit')}}</el-button>
     </div>
     <div class="center">
-      <el-row type="flex"
-        class="row-bg"
-        justify="space-around">
+      <el-row type="flex" class="row-bg" justify="space-around">
         <el-col :span="8">
           <div class="grid-content">
             <div class="sort-content">
@@ -44,9 +39,7 @@
       </el-row>
     </div>
     <div>
-      <el-row type="flex"
-        class="row-bg"
-        justify="space-around">
+      <el-row type="flex" class="row-bg" justify="space-around">
         <el-col :span="8">
           <div class="grid-content">
             <div class="sort-content">
@@ -77,41 +70,22 @@
         </el-col>
       </el-row>
     </div>
-    <el-dialog width="600px"
-      :title="$t('user.userInfo')"
-      :visible.sync="userMsgBox">
-      <el-form :model="InfoForm"
-        label-width="150px"
-        :rules="userInfoRole"
-        ref="InfoForm">
-        <el-form-item :label="$t('useMsg.phone')"
-          prop="phone">
-          <el-input size="small"
-            v-model.number="InfoForm.phone"
-            style="width:160px;"></el-input>
+    <el-dialog width="600px" :title="$t('user.userInfo')" :visible.sync="userMsgBox">
+      <el-form :model="InfoForm" label-width="150px" :rules="userInfoRole" ref="InfoForm">
+        <el-form-item :label="$t('useMsg.phone')" prop="phone">
+          <el-input size="small" v-model.number="InfoForm.phone" style="width:160px;"></el-input>
         </el-form-item>
-        <el-form-item :label="$t('useMsg.nickName')"
-          :error="nameError"
-          prop="userName">
-          <el-input size="small"
-            v-model="InfoForm.nickName"
-            style="width:160px;"></el-input>
+        <el-form-item :label="$t('useMsg.nickName')" :error="nameError" prop="userName">
+          <el-input size="small" v-model="InfoForm.nickName" style="width:160px;"></el-input>
         </el-form-item>
         <!-- 邮箱 -->
-        <el-form-item :label="$t('useMsg.email')"
-          prop="email">
-          <el-input size="small"
-            v-model="InfoForm.email"
-            style="width:160px;"></el-input>
+        <el-form-item :label="$t('useMsg.email')" prop="email">
+          <el-input size="small" v-model="InfoForm.email" style="width:160px;"></el-input>
         </el-form-item>
       </el-form>
-      <div slot="footer"
-        class="dialog-footer">
-        <el-button size="small"
-          @click="resetForm">{{$t('timeBtn.cancle')}}</el-button>
-        <el-button size="small"
-          type="primary"
-          @click="submitForm('InfoForm')">{{$t('timeBtn.sure')}}</el-button>
+      <div slot="footer" class="dialog-footer">
+        <el-button size="small" @click="resetForm">{{$t('timeBtn.cancle')}}</el-button>
+        <el-button size="small" type="primary" @click="submitForm('InfoForm')">{{$t('timeBtn.sure')}}</el-button>
       </div>
     </el-dialog>
   </div>
@@ -122,7 +96,7 @@ import { deepClone } from '@/utils/functions';
 import t from "@/utils/translate";
 
 export default {
-  data () {
+  data() {
     return {
       userMsgBox: false,
       userArr: {},
@@ -148,20 +122,20 @@ export default {
     };
   },
   methods: {
-    openEdit () {
+    openEdit() {
       this.userMsgBox = true;
       this.InfoForm = deepClone(this.userArr);
     },
-    closeMsgBox (formName) {
+    closeMsgBox(formName) {
       this.userMsgBox = false;
       this.InfoForm = {};
       this.$refs[formName].resetFields();
     },
-    resetForm () {
+    resetForm() {
       this.userMsgBox = false;
       this.$refs.InfoForm.resetFields();
     },
-    submitForm () {
+    submitForm() {
       // const nickName = /[\s""]/g;
       // this.nameError = "";
       // if (nickName.test(this.InfoForm.nickName)) {
@@ -196,7 +170,7 @@ export default {
         }
       });
     },
-    init () {
+    init() {
       this.$api.getUserMsg().then(res => {
         console.log(res);
         if (res.data && res.data.code === 0) {
@@ -209,7 +183,7 @@ export default {
       });
     }
   },
-  mounted () {
+  mounted() {
     this.init();
   }
 };

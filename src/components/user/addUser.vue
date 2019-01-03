@@ -1,135 +1,87 @@
 <template>
   <div class="addWarrp">
-    <div v-for="key in userData"
-      class="addBox"
-      :key="key.role"
-      @click="adduser(key)">
+    <div v-for="key in userData" class="addBox" :key="key.role" @click="adduser(key)">
       <!-- <img :src="key.default" alt=""> -->
-      <img src="../../../static/img/add-admin.png"
-        alt=""
-        srcset="">
+      <img src="../../../static/img/add-admin.png" alt="" srcset="">
       <p>{{key.text}}</p>
     </div>
-    <el-dialog width="600px"
-      :title="userText"
-      :visible.sync="custom">
-      <el-form :model="adminForm"
-        :rules="customerRules"
-        ref="adminForm">
+    <el-dialog width="600px" :title="userText" :visible.sync="custom">
+      <el-form :model="adminForm" :rules="customerRules" ref="adminForm">
         <el-row :gutter="40">
           <el-col :span="12">
             <!-- 用户名 -->
-            <el-form-item :label="$t('useMsg.name')"
-              prop="account">
-              <el-input v-model.trim="adminForm.account"
-                @keyup.native="adminForm.account=adminForm.account.replace(/\s+/g,'')"
-                auto-complete="off"></el-input>
+            <el-form-item :label="$t('useMsg.name')" prop="account">
+              <el-input v-model.trim="adminForm.account" @keyup.native="adminForm.account=adminForm.account.replace(/\s+/g,'')" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <!-- 登陆密码 -->
-            <el-form-item :label="$t('useMsg.loginPwd')"
-              prop="password">
-              <el-input v-model.trim="adminForm.password"
-                type="password"
-                @keyup.native="adminForm.password=adminForm.password.replace(/\s+/g,'')"
-                auto-complete="off"></el-input>
+            <el-form-item :label="$t('useMsg.loginPwd')" prop="password">
+              <el-input v-model.trim="adminForm.password" type="password" @keyup.native="adminForm.password=adminForm.password.replace(/\s+/g,'')" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="40">
           <el-col :span="12">
-            <el-form-item :label="$t('useMsg.phone')"
-              prop="phone">
-              <el-input v-model="adminForm.phone"
-                auto-complete="off"></el-input>
+            <el-form-item :label="$t('useMsg.phone')" prop="phone">
+              <el-input v-model="adminForm.phone" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('useMsg.email')"
-              prop="email">
-              <el-input v-model="adminForm.email"
-                auto-complete="off"></el-input>
+            <el-form-item :label="$t('useMsg.email')" prop="email">
+              <el-input v-model="adminForm.email" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
       </el-form>
       <div>
       </div>
-      <div slot="footer"
-        class="dialog-footer">
+      <div slot="footer" class="dialog-footer">
         <!-- 重置 -->
         <el-button @click="resetAdmin('adminForm')">{{$t('timeBtn.reset')}}</el-button>
         <!-- 确 认 -->
-        <el-button :loading="addcustorm"
-          @click="submitAdmin('adminForm')"
-          type="primary">{{$t('timeBtn.sure')}}</el-button>
+        <el-button :loading="addcustorm" @click="submitAdmin('adminForm')" type="primary">{{$t('timeBtn.sure')}}</el-button>
       </div>
     </el-dialog>
-    <el-dialog width="600px"
-      :title="userText"
-      :visible.sync="manfictor">
-      <el-form :model="CompanyForm"
-        :rules="customerRules"
-        ref="CompanyForm">
+    <el-dialog width="600px" :title="userText" :visible.sync="manfictor">
+      <el-form :model="CompanyForm" :rules="customerRules" ref="CompanyForm">
         <el-row :gutter="40">
           <el-col :span="12">
-            <el-form-item :label="$t('useMsg.name')"
-              prop="account">
-              <el-input size="small"
-                v-model.trim="CompanyForm.account"
-                @keyup.native="CompanyForm.account=CompanyForm.account.replace(/\s+/g,'')"
-                auto-complete="off"></el-input>
+            <el-form-item :label="$t('useMsg.name')" prop="account">
+              <el-input size="small" v-model.trim="CompanyForm.account" @keyup.native="CompanyForm.account=CompanyForm.account.replace(/\s+/g,'')" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('useMsg.loginPwd')"
-              prop="password">
-              <el-input size="small"
-                v-model.trim="CompanyForm.password"
-                @keyup.native="CompanyForm.password=CompanyForm.password.replace(/\s+/g,'')"
-                type="password"
-                auto-complete="off"></el-input>
+            <el-form-item :label="$t('useMsg.loginPwd')" prop="password">
+              <el-input size="small" v-model.trim="CompanyForm.password" @keyup.native="CompanyForm.password=CompanyForm.password.replace(/\s+/g,'')" type="password" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="40">
           <el-col :span="12">
-            <el-form-item :label="$t('useMsg.phone')"
-              prop="phone">
-              <el-input size="small"
-                v-model="CompanyForm.phone"
-                auto-complete="off"></el-input>
+            <el-form-item :label="$t('useMsg.phone')" prop="phone">
+              <el-input size="small" v-model="CompanyForm.phone" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('useMsg.email')"
-              prop="email">
-              <el-input size="small"
-                v-model="CompanyForm.email"
-                auto-complete="off"></el-input>
+            <el-form-item :label="$t('useMsg.email')" prop="email">
+              <el-input size="small" v-model="CompanyForm.email" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="40">
           <el-col :span="12">
-            <el-form-item :label="$t('useMsg.enterpriseName')"
-              prop="companyName">
-              <el-input size="small"
-                v-model.trim="CompanyForm.companyName"
-                auto-complete="off"></el-input>
+            <el-form-item :label="$t('useMsg.enterpriseName')" prop="companyName">
+              <el-input size="small" v-model.trim="CompanyForm.companyName" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
       </el-form>
       <div>
       </div>
-      <div slot="footer"
-        class="dialog-footer">
+      <div slot="footer" class="dialog-footer">
         <el-button @click="resetCompany('CompanyForm')">{{$t('timeBtn.reset')}}</el-button>
-        <el-button :loading="addadmin"
-          @click="submitCompany('CompanyForm')"
-          type="primary">{{$t('timeBtn.sure')}}</el-button>
+        <el-button :loading="addadmin" @click="submitCompany('CompanyForm')" type="primary">{{$t('timeBtn.sure')}}</el-button>
       </div>
     </el-dialog>
   </div>
@@ -140,7 +92,7 @@ import addData from "@/config/add-user-data";
 import t from "@/utils/translate";
 
 export default {
-  data () {
+  data() {
     return {
       userText: '',
       manfictor: false,
@@ -177,12 +129,12 @@ export default {
       }
     };
   },
-  mounted () {
+  mounted() {
     this.userLimit();
   },
 
   methods: {
-    userLimit () {
+    userLimit() {
       let loginData = sessionStorage.getItem("loginData");
       if (!loginData) {
         this.$router.push("/login");
@@ -209,7 +161,7 @@ export default {
       });
       console.log(this.userData);
     },
-    adduser (key) {
+    adduser(key) {
       console.log(key);
       this.userText = key.text;
       this.addType = key.role;
@@ -219,11 +171,11 @@ export default {
         this.manfictor = true;
       }
     },
-    resetAdmin (formName) {
+    resetAdmin(formName) {
       this.$refs[formName].resetFields();
       this.adminForm = {};
     },
-    submitAdmin (formName) {
+    submitAdmin(formName) {
       console.log(formName);
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -250,11 +202,11 @@ export default {
         }
       });
     },
-    resetCompany (formName) {
+    resetCompany(formName) {
       this.$refs[formName].resetFields();
       this.CompanyForm = {};
     },
-    submitCompany (formName) {
+    submitCompany(formName) {
       console.log(formName);
       this.$refs[formName].validate(valid => {
         if (valid) {

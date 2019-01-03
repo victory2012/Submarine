@@ -15,7 +15,10 @@ import api from '@/api/index';
 import i18n from '@/i18n';
 import utils from './utils/utils';
 import ElementUI from './UI/element';
-import { Message, MessageBox } from 'element-ui';
+import {
+  Message,
+  MessageBox
+} from 'element-ui';
 
 promise.polyfill();
 const isDebug_mode = process.env.NODE_ENV !== 'production';

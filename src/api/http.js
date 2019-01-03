@@ -1,6 +1,8 @@
 /* eslint-disable */
 import axios from 'axios';
-import { Message } from 'element-ui';
+import {
+  Message
+} from 'element-ui';
 import t from '@/utils/translate';
 import router from '../router';
 
@@ -61,22 +63,26 @@ function checkCode(res) {
 
 function switchCode(status) {
   switch (Number(status.code)) {
-    case 1: {
-      setTimeout(() => {
-        router.push('/login');
-        sessionStorage.clear();
-      }, 1000);
-      return Message.warning(`${t('responseCode.sessionOut')}`);
-    }
-    case 10: {
-      return Message.warning(`${t('responseCode.parameterErr')}`);
-    }
-    case 20: {
-      return Message.warning(`${t('responseCode.permissions')}`);
-    }
-    case 30: {
-      return Message.warning(`${t('responseCode.dataExists')}`);
-    }
+    case 1:
+      {
+        setTimeout(() => {
+          router.push('/login');
+          sessionStorage.clear();
+        }, 1000);
+        return Message.warning(`${t('responseCode.sessionOut')}`);
+      }
+    case 10:
+      {
+        return Message.warning(`${t('responseCode.parameterErr')}`);
+      }
+    case 20:
+      {
+        return Message.warning(`${t('responseCode.permissions')}`);
+      }
+    case 30:
+      {
+        return Message.warning(`${t('responseCode.dataExists')}`);
+      }
     case 40:
       return Message.warning(`${t('responseCode.sendCode')}`);
 
@@ -95,22 +101,26 @@ function switchCode(status) {
     case 104001:
       return Message.warning(`${t('responseCode.accountOrPwdErr')}`);
 
-    case 104002: {
-      return Message.warning(`${t('responseCode.userNotExist')}`);
-    }
-    case 201001: {
-      return Message.warning(`${t('responseCode.companyExists')}`);
-    }
-    case 202002: {
-      return Message.warning(`${t('responseCode.hasInvalidHost')}`);
-    }
+    case 104002:
+      {
+        return Message.warning(`${t('responseCode.userNotExist')}`);
+      }
+    case 201001:
+      {
+        return Message.warning(`${t('responseCode.companyExists')}`);
+      }
+    case 202002:
+      {
+        return Message.warning(`${t('responseCode.hasInvalidHost')}`);
+      }
     case 204001:
       return Message.warning(`${t('responseCode.notFindCompany')}`);
     case 301001:
       return Message.warning(`${t('responseCode.deviceExists')}`);
-    case 301002: {
-      return Message.warning(`${t('responseCode.notFindDevice')}`);
-    }
+    case 301002:
+      {
+        return Message.warning(`${t('responseCode.notFindDevice')}`);
+      }
     case 301101:
       return Message.warning(`${t('responseCode.gpsDeviceExists')}`);
     case 301201:
@@ -158,15 +168,15 @@ export default {
   post(url, data) {
     //  post
     return axios({
-      method: 'post',
-      baseURL: baseURL,
-      url,
-      data: JSON.stringify(data),
-      timeout: timeout,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+        method: 'post',
+        baseURL: baseURL,
+        url,
+        data: JSON.stringify(data),
+        timeout: timeout,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
       .then(response => {
         return checkStatus(response);
       })
@@ -177,12 +187,12 @@ export default {
   get(url, params) {
     // get
     return axios({
-      method: 'get',
-      baseURL: baseURL,
-      url,
-      params, // get 请求时带的参数
-      timeout: timeout
-    })
+        method: 'get',
+        baseURL: baseURL,
+        url,
+        params, // get 请求时带的参数
+        timeout: timeout
+      })
       .then(response => {
         return checkStatus(response);
       })
@@ -207,15 +217,15 @@ export default {
   delete(url, params) {
     // delete
     return axios({
-      method: 'delete',
-      baseURL: baseURL,
-      url,
-      params, // delete 请求时带的参数
-      timeout: timeout,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+        method: 'delete',
+        baseURL: baseURL,
+        url,
+        params, // delete 请求时带的参数
+        timeout: timeout,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
       .then(response => {
         return checkStatus(response);
       })

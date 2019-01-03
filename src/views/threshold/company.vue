@@ -1,136 +1,86 @@
 <template>
   <div class="container">
     <div class="search">
-      <el-button @click="modifyThreshold"
-        size="small"
-        type="primary">{{$t('threshold.changeThreshold')}}</el-button>
-      <el-button @click="getTemplate"
-        size="small"
-        plain>{{$t('threshold.recovery')}}</el-button>
+      <el-button @click="modifyThreshold" size="small" type="primary">{{$t('threshold.changeThreshold')}}</el-button>
+      <el-button @click="getTemplate" size="small" plain>{{$t('threshold.recovery')}}</el-button>
     </div>
     <div class="warrp">
-      <el-form :model="batteryForm"
-        :rules="batteryFormRules"
-        ref="batteryForm">
+      <el-form :model="batteryForm" :rules="batteryFormRules" ref="batteryForm">
         <el-row :gutter="80">
           <el-col :span="12">
             <!-- 单体充电电压上限阈值 (V)-->
-            <el-form-item :label="`${$t('threshold.singleVoltage')}(V)`"
-              prop="singleMaxChargeVoltage">
-              <el-input-number controls-position="right"
-                size="small"
-                v-model="batteryForm.singleMaxChargeVoltage"
-                :style="inputWidth"></el-input-number>
+            <el-form-item :label="`${$t('threshold.singleVoltage')}(V)`" prop="singleMaxChargeVoltage">
+              <el-input-number controls-position="right" size="small" v-model="batteryForm.singleMaxChargeVoltage" :style="inputWidth"></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <!-- 单体放电电压下限阈值 -->
-            <el-form-item :label="`${$t('threshold.singleDisVoltage')}(V)`"
-              prop="singleMinDischargeVoltage">
-              <el-input-number controls-position="right"
-                size="small"
-                v-model.number="batteryForm.singleMinDischargeVoltage"
-                :style="inputWidth"></el-input-number>
+            <el-form-item :label="`${$t('threshold.singleDisVoltage')}(V)`" prop="singleMinDischargeVoltage">
+              <el-input-number controls-position="right" size="small" v-model.number="batteryForm.singleMinDischargeVoltage" :style="inputWidth"></el-input-number>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="80">
           <el-col :span="12">
             <!-- 整组充电电压上限阈值(V) -->
-            <el-form-item :label="`${$t('threshold.maxColtage')}(V)`"
-              prop="maxChargeVoltage">
-              <el-input-number controls-position="right"
-                size="small"
-                v-model="batteryForm.maxChargeVoltage"
-                :style="inputWidth"></el-input-number>
+            <el-form-item :label="`${$t('threshold.maxColtage')}(V)`" prop="maxChargeVoltage">
+              <el-input-number controls-position="right" size="small" v-model="batteryForm.maxChargeVoltage" :style="inputWidth"></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <!-- 整组放电电压下限阈值(V) -->
-            <el-form-item :label="`${$t('threshold.minDVoltage')}(V)`"
-              prop="minDischargeVoltage">
-              <el-input-number controls-position="right"
-                size="small"
-                v-model.number="batteryForm.minDischargeVoltage"
-                :style="inputWidth"></el-input-number>
+            <el-form-item :label="`${$t('threshold.minDVoltage')}(V)`" prop="minDischargeVoltage">
+              <el-input-number controls-position="right" size="small" v-model.number="batteryForm.minDischargeVoltage" :style="inputWidth"></el-input-number>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="80">
           <el-col :span="12">
             <!-- 充电电流上限阈值系数 -->
-            <el-form-item :label="$t('threshold.maxCCurrent')"
-              prop="maxChargeCurrent">
-              <el-input-number controls-position="right"
-                size="small"
-                v-model.number="batteryForm.maxChargeCurrent"
-                :style="inputWidth"></el-input-number>
+            <el-form-item :label="$t('threshold.maxCCurrent')" prop="maxChargeCurrent">
+              <el-input-number controls-position="right" size="small" v-model.number="batteryForm.maxChargeCurrent" :style="inputWidth"></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <!-- 放电电流上限阈值系数 -->
-            <el-form-item :label="$t('threshold.maxDCurrent')"
-              prop="maxDischargeCurrent">
-              <el-input-number controls-position="right"
-                size="small"
-                v-model.number="batteryForm.maxDischargeCurrent"
-                :style="inputWidth"></el-input-number>
+            <el-form-item :label="$t('threshold.maxDCurrent')" prop="maxDischargeCurrent">
+              <el-input-number controls-position="right" size="small" v-model.number="batteryForm.maxDischargeCurrent" :style="inputWidth"></el-input-number>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="80">
           <el-col :span="12">
             <!-- 充电温度上限阈值(℃) -->
-            <el-form-item :label="`${$t('threshold.maxCTemperat')}(℃)`"
-              prop="maxChargeTemperature">
-              <el-input-number controls-position="right"
-                size="small"
-                v-model.number="batteryForm.maxChargeTemperature"
-                :style="inputWidth"></el-input-number>
+            <el-form-item :label="`${$t('threshold.maxCTemperat')}(℃)`" prop="maxChargeTemperature">
+              <el-input-number controls-position="right" size="small" v-model.number="batteryForm.maxChargeTemperature" :style="inputWidth"></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <!-- 充电温度下限阈值(℃) -->
-            <el-form-item :label="`${$t('threshold.minCTemperat')}(℃)`"
-              prop="minChargeTemperature">
-              <el-input-number controls-position="right"
-                size="small"
-                v-model.number="batteryForm.minChargeTemperature"
-                :style="inputWidth"></el-input-number>
+            <el-form-item :label="`${$t('threshold.minCTemperat')}(℃)`" prop="minChargeTemperature">
+              <el-input-number controls-position="right" size="small" v-model.number="batteryForm.minChargeTemperature" :style="inputWidth"></el-input-number>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="80">
           <el-col :span="12">
             <!-- 放电温度上限阈值(℃) -->
-            <el-form-item :label="`${$t('threshold.maxDTemperat')}(℃)`"
-              prop="maxDischargeTemperature">
-              <el-input-number controls-position="right"
-                size="small"
-                v-model.number="batteryForm.maxDischargeTemperature"
-                :style="inputWidth"></el-input-number>
+            <el-form-item :label="`${$t('threshold.maxDTemperat')}(℃)`" prop="maxDischargeTemperature">
+              <el-input-number controls-position="right" size="small" v-model.number="batteryForm.maxDischargeTemperature" :style="inputWidth"></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <!-- 放电温度下限阈值(℃) -->
-            <el-form-item :label="`${$t('threshold.minDTemperat')}(℃)`"
-              prop="minDischargeTemperature">
-              <el-input-number controls-position="right"
-                size="small"
-                v-model.number="batteryForm.minDischargeTemperature"
-                :style="inputWidth"></el-input-number>
+            <el-form-item :label="`${$t('threshold.minDTemperat')}(℃)`" prop="minDischargeTemperature">
+              <el-input-number controls-position="right" size="small" v-model.number="batteryForm.minDischargeTemperature" :style="inputWidth"></el-input-number>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="80">
           <el-col :span="12">
             <!-- 补水超限天数 -->
-            <el-form-item :label="$t('threshold.maxFODays')"
-              prop="maxFluidOverDays">
-              <el-input-number controls-position="right"
-                size="small"
-                v-model.number="batteryForm.maxFluidOverDays"
-                :style="inputWidth"></el-input-number>
+            <el-form-item :label="$t('threshold.maxFODays')" prop="maxFluidOverDays">
+              <el-input-number controls-position="right" size="small" v-model.number="batteryForm.maxFluidOverDays" :style="inputWidth"></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -142,22 +92,14 @@
         <el-row :gutter="80">
           <el-col :span="12">
             <!-- 充电容量上限阈值系数 -->
-            <el-form-item :label="$t('threshold.maxCCapacity')"
-              prop="maxChargeCapacity">
-              <el-input-number controls-position="right"
-                size="small"
-                v-model.number="batteryForm.maxChargeCapacity"
-                :style="inputWidth"></el-input-number>
+            <el-form-item :label="$t('threshold.maxCCapacity')" prop="maxChargeCapacity">
+              <el-input-number controls-position="right" size="small" v-model.number="batteryForm.maxChargeCapacity" :style="inputWidth"></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <!-- 充电容量下限阈值系数 -->
-            <el-form-item :label="$t('threshold.minCCapacity')"
-              prop="minChargeCapacity">
-              <el-input-number controls-position="right"
-                size="small"
-                v-model.number="batteryForm.minChargeCapacity"
-                :style="inputWidth"></el-input-number>
+            <el-form-item :label="$t('threshold.minCCapacity')" prop="minChargeCapacity">
+              <el-input-number controls-position="right" size="small" v-model.number="batteryForm.minChargeCapacity" :style="inputWidth"></el-input-number>
             </el-form-item>
           </el-col>
         </el-row>
@@ -170,7 +112,7 @@ import { Message } from "element-ui";
 import t from "@/utils/translate";
 
 export default {
-  data () {
+  data() {
     return {
       inputWidth: 'width:400px',
       setings: {},
@@ -247,7 +189,8 @@ export default {
           }
         ],
         maxFluidOverDays: [
-          { required: true,
+          {
+            required: true,
             message: t('threshold.warn.maxFODays'), // "请输入补水超限天数",
             trigger: "blur"
           }
@@ -269,11 +212,11 @@ export default {
       },
     };
   },
-  mounted () {
+  mounted() {
     this.getCampany();
   },
   methods: {
-    getTemplate () {
+    getTemplate() {
       this.$api.getSituationTempPolicy().then(res => {
         console.log(res);
         if (res.data && res.data.code === 0) {
@@ -282,7 +225,7 @@ export default {
         }
       });
     },
-    getCampany () {
+    getCampany() {
       this.$api.getTempPolicy().then(res => {
         console.log(res);
         if (res.data && res.data.code === 0) {
@@ -301,7 +244,7 @@ export default {
         }
       });
     },
-    modifyThreshold () {
+    modifyThreshold() {
       this.$refs.batteryForm.validate(valid => {
         if (valid) {
           let params = {
@@ -331,7 +274,7 @@ export default {
       });
     },
     /* 添加 */
-    addFunction (data) {
+    addFunction(data) {
       this.$api.batteryAddPolicy(data).then(res => {
         console.log(res);
         if (res.data && res.data.code === 0) {
@@ -344,7 +287,7 @@ export default {
       });
     },
     /* 修改 */
-    modifyFunction (data) {
+    modifyFunction(data) {
       this.$api.batteryChangePolicy(data).then(res => {
         console.log(res);
         if (res.data && res.data.code === 0) {

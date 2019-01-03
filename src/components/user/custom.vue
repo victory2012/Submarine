@@ -1,57 +1,40 @@
 <template>
-  <el-dialog width="600px"
-    :title="userText"
-    @close="closedIt"
-    :visible.sync="custom">
-    <el-form :model="adminForm"
-      :rules="customerRules"
-      ref="adminForm">
+  <el-dialog width="600px" :title="userText" @close="closedIt" :visible.sync="custom">
+    <el-form :model="adminForm" :rules="customerRules" ref="adminForm">
       <el-row :gutter="40">
         <el-col :span="12">
           <!-- 用户名 -->
-          <el-form-item :label="$t('useMsg.name')"
-            prop="account">
-            <el-input v-model="adminForm.account"
-              auto-complete="off"></el-input>
+          <el-form-item :label="$t('useMsg.name')" prop="account">
+            <el-input v-model="adminForm.account" auto-complete="off"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <!-- 登陆密码 -->
-          <el-form-item :label="$t('useMsg.loginPwd')"
-            prop="password">
-            <el-input v-model="adminForm.password"
-              type="password"
-              auto-complete="off"></el-input>
+          <el-form-item :label="$t('useMsg.loginPwd')" prop="password">
+            <el-input v-model="adminForm.password" type="password" auto-complete="off"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
       <el-row :gutter="40">
         <el-col :span="12">
-          <el-form-item :label="$t('useMsg.phone')"
-            prop="phone">
-            <el-input v-model="adminForm.phone"
-              auto-complete="off"></el-input>
+          <el-form-item :label="$t('useMsg.phone')" prop="phone">
+            <el-input v-model="adminForm.phone" auto-complete="off"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item :label="$t('useMsg.email')"
-            prop="email">
-            <el-input v-model="adminForm.email"
-              auto-complete="off"></el-input>
+          <el-form-item :label="$t('useMsg.email')" prop="email">
+            <el-input v-model="adminForm.email" auto-complete="off"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
     </el-form>
     <div>
     </div>
-    <div slot="footer"
-      class="dialog-footer">
+    <div slot="footer" class="dialog-footer">
       <!-- 重置 -->
       <el-button @click="resetAdmin('adminForm')">{{$t('timeBtn.reset')}}</el-button>
       <!-- 确 认 -->
-      <el-button :loading="addcustorm"
-        @click="submitAdmin('adminForm')"
-        type="primary">{{$t('timeBtn.sure')}}</el-button>
+      <el-button :loading="addcustorm" @click="submitAdmin('adminForm')" type="primary">{{$t('timeBtn.sure')}}</el-button>
     </div>
   </el-dialog>
 </template>
@@ -67,7 +50,7 @@ export default {
       required: true
     }
   },
-  data () {
+  data() {
     return {
       creatAdmin: true,
       addcustorm: false,
@@ -108,11 +91,11 @@ export default {
     }
   },
   methods: {
-    resetAdmin (formName) {
+    resetAdmin(formName) {
       this.$refs[formName].resetFields();
       this.adminForm = {};
     },
-    submitAdmin (formName) {
+    submitAdmin(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           console.log("yes");
@@ -164,7 +147,7 @@ export default {
         }
       });
     },
-    closedIt () {
+    closedIt() {
       this.resetAdmin("adminForm");
       this.$store.state.custom = false;
     }

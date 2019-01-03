@@ -1,22 +1,12 @@
 <template>
   <div class="">
     <div class="sort-content">
-      <el-form :model="ruleForm"
-        :rules="rules"
-        ref="ruleForm"
-        label-width="120px"
-        class="demo-ruleForm">
-        <el-form-item :label="$t('password.new')"
-          prop="password">
-          <el-input size="small"
-            v-model="ruleForm.password"
-            type="password"
-            style="width:220px;"></el-input>
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+        <el-form-item :label="$t('password.new')" prop="password">
+          <el-input size="small" v-model="ruleForm.password" type="password" style="width:220px;"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button size="small"
-            type="primary"
-            @click="submitForm('ruleForm')">{{$t('password.changeBtn')}}</el-button>
+          <el-button size="small" type="primary" @click="submitForm('ruleForm')">{{$t('password.changeBtn')}}</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -27,7 +17,7 @@ import t from "@/utils/translate";
 
 export default {
   name: "Password",
-  data () {
+  data() {
     return {
       ruleForm: {},
       rules: {
@@ -44,7 +34,7 @@ export default {
     };
   },
   methods: {
-    submitForm (formName) {
+    submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           let userObj = {

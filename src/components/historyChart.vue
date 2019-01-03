@@ -1,22 +1,16 @@
 <template>
   <div class="bgFFF">
     <div class="chartWarrp">
-      <div class="chartInfo"
-        id="echart1"></div>
-      <div class="chartInfo"
-        id="echart2"></div>
+      <div class="chartInfo" id="echart1"></div>
+      <div class="chartInfo" id="echart2"></div>
     </div>
     <div class="chartWarrp">
-      <div class="chartInfo"
-        id="echart3"></div>
-      <div class="chartInfo"
-        id="echart5"></div>
+      <div class="chartInfo" id="echart3"></div>
+      <div class="chartInfo" id="echart5"></div>
     </div>
     <div class="chartWarrp">
-      <div class="chartInfo"
-        id="echart4"></div>
-      <div class="chartInfo"
-        id="echartasdad4"></div>
+      <div class="chartInfo" id="echart4"></div>
+      <div class="chartInfo" id="echartasdad4"></div>
     </div>
   </div>
 </template>
@@ -33,18 +27,18 @@ export default {
   props: {
     chartData: {
       type: Object,
-      default () {
+      default() {
         return {};
       }
     },
     loading: {
       type: Boolean,
-      default () {
+      default() {
         return false;
       }
     }
   },
-  data () {
+  data() {
     return {
       myEcharts: null,
       isOptionAbnormal: false
@@ -65,11 +59,11 @@ export default {
       deep: true
     }
   },
-  mounted () {
+  mounted() {
     this.init();
   },
   methods: {
-    init () {
+    init() {
       let $echartsDOM1 = document.getElementById("echart1");
       let $echartsDOM2 = document.getElementById("echart2");
       let $echartsDOM3 = document.getElementById("echart3");
@@ -123,7 +117,7 @@ export default {
       this.showLoading();
       this.dataChange(this.chartData);
     },
-    showLoading (curVal) {
+    showLoading(curVal) {
       if (curVal) {
         this.myEcharts1.showLoading();
         this.myEcharts2.showLoading();
@@ -138,7 +132,7 @@ export default {
         this.myEcharts5.hideLoading();
       }
     },
-    dataChange (datas) {
+    dataChange(datas) {
       let voltageOptions = deepClone(options);
       voltageOptions.title.text = t('realTime.voltage'); // 电压
       voltageOptions.yAxis.axisLabel.formatter = "{value} v";

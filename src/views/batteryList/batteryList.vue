@@ -203,7 +203,7 @@ export default {
     batteryDetail,
     upLoade
   },
-  data () {
+  data() {
     return {
       AdminRoles: permissionFun(),
       companyArr: [], // 生产企业公司名称
@@ -277,7 +277,7 @@ export default {
     //   console.log("mqtt is connected");
     // },
     /* 拉黑 */
-    addBlack (row) {
+    addBlack(row) {
       let deviceObj = {
         id: row.deviceId,
         status: -1
@@ -294,11 +294,11 @@ export default {
       });
     },
 
-    reloadBattery () {
+    reloadBattery() {
       this.getBatteryList();
     },
     /* 查看详情 */
-    details (data) {
+    details(data) {
       console.log(data);
       this.$api.betteryDetails(data.id).then(res => {
         console.log(res);
@@ -312,12 +312,12 @@ export default {
       });
     },
     /* 取消电池绑定 */
-    resetBind () {
+    resetBind() {
       this.$refs.deviceModel.resetFields();
       this.deviceModel = {};
     },
     /* 电池绑定 */
-    submitBind () {
+    submitBind() {
       this.$refs.deviceModel.validate(vlited => {
         if (vlited) {
           this.bindings = true;
@@ -354,18 +354,18 @@ export default {
       });
     },
     /* 每页显示的数量 */
-    handleSizeChange (val) {
+    handleSizeChange(val) {
       this.loading = true;
       this.pageSize = val;
       this.getBatteryList();
     },
     /* 显示第几页 */
-    handleCurrentChange (val) {
+    handleCurrentChange(val) {
       this.currentPage = val;
       this.loading = true;
       this.getBatteryList();
     },
-    lookFor (row) {
+    lookFor(row) {
       this.$router.push({
         path: "battery/run",
         query: {
@@ -378,7 +378,7 @@ export default {
       });
     },
     /* 删除 */
-    deleteBattery (row) {
+    deleteBattery(row) {
       if (!row.id) return;
       this.$messageBox.alert(`${t("batteryList.deleteTip")}`, {
         showCancelButton: true,
@@ -400,14 +400,14 @@ export default {
       });
     },
     /* 绑定按钮 */
-    bindDeviceClick (row) {
+    bindDeviceClick(row) {
       console.log(row);
       this.getDeviceList();
       this.bindDevice = true;
       this.bindRows = row;
     },
     /* 解绑按钮 */
-    unbindClick (row) {
+    unbindClick(row) {
       this.$api.batteryUnBind(row.hostId).then(res => {
         if (res.data && res.data.code === 0) {
           // console.log(res);
@@ -421,7 +421,7 @@ export default {
     },
 
     /* 清空 */
-    clearOptions () {
+    clearOptions() {
       this.batCustom = "";
       this.batteryId = "";
       this.batteryModel = "";
@@ -430,7 +430,7 @@ export default {
       this.getBatteryList();
     },
     /* 获取电池列表 */
-    getBatteryList () {
+    getBatteryList() {
       let options = {
         pageSize: this.pageSize,
         pageNum: this.currentPage,
@@ -483,7 +483,7 @@ export default {
     },
 
     /* 获取电池组客户企业表 */
-    getCompanyId () {
+    getCompanyId() {
       this.$api.purchaseNames().then(res => {
         console.log("获取电池组客户企业表", res);
         if (res.data && res.data.code === 0) {
@@ -494,7 +494,7 @@ export default {
         }
       });
     },
-    getDeviceList () {
+    getDeviceList() {
       this.$api
         .DeviceList("/device/code?status=0&bindingStatus=0")
         .then(res => {
@@ -510,7 +510,7 @@ export default {
         });
     },
     /* 获取电池型号列表 */
-    getBatteryModelList () {
+    getBatteryModelList() {
       this.$api.batteryModelList().then(res => {
         console.log("获取电池型号列表", res);
         if (res.data && res.data.code === 0) {
@@ -523,7 +523,7 @@ export default {
       });
     },
     /* 用户权限 */
-    userRole () {
+    userRole() {
       let userObj = {};
       if (
         this.loginData.type === 1 ||
@@ -554,12 +554,12 @@ export default {
       // }
       return userObj;
     },
-    init () {
+    init() {
       this.getCompanyId(); // 获取客户企业表
       this.getBatteryModelList(); // 获取电池型号列表
       this.getDeviceList(); // 获取设备列表
     },
-    getCompany () {
+    getCompany() {
       this.$api.manufacturerNames().then(res => {
         console.log("companyArr", res);
         if (res.data && res.data.code === 0) {
@@ -568,7 +568,7 @@ export default {
       });
     }
   },
-  destroyed () {
+  destroyed() {
     // if (
     //   typeof mqttClient === "object" &&
     //   typeof mqttClient.isConnected === "function"
@@ -577,7 +577,7 @@ export default {
     //   mqttClient = null;
     // }
   },
-  mounted () {
+  mounted() {
     this.$store.state.addBattery = false;
     this.loginData = JSON.parse(utils.getStorage("loginData"));
     this.init();

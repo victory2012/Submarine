@@ -4,8 +4,7 @@
       <!-- 比较数据 -->
       <h2 class="textAlain title">{{$t('comparison.comparData')}}</h2>
       <div class="textAlain">
-        <div class="compare-add addone"
-          v-show="contrastData">
+        <div class="compare-add addone" v-show="contrastData">
           <!-- 电池编号 -->
           <p>{{$t('comparison.batteryCode')}}: {{chooseObj.code}}</p><br />
         </div>
@@ -15,126 +14,68 @@
             :key="tag.hostId">{{$t('comparison.batteryCode')}}{{index+1}}: {{tag.code}}</p>
           <p>电池编号2: {{stacks1[1].code}}</p>
         </div> -->
-        <div @click="openTable"
-          class="compare-add">{{chooseText}}</div>
+        <div @click="openTable" class="compare-add">{{chooseText}}</div>
       </div>
     </div>
     <div class="timeCenter">
       <div class="timeBar">
         <span class="lables">{{$t('history.from')}}</span>
-        <el-date-picker class="queryTime"
-          :class="{'timeSelect': !defaultGray}"
-          @focus="timeChanges"
-          size="small"
-          v-model="start"
-          type="date"
-          :placeholder="$t('history.startTime')"></el-date-picker>
+        <el-date-picker class="queryTime" :class="{'timeSelect': !defaultGray}" @focus="timeChanges" size="small" v-model="start" type="date" :placeholder="$t('history.startTime')"></el-date-picker>
         <span class="lable">{{$t('history.to')}}</span>
-        <el-date-picker class="queryTime"
-          :class="{'timeSelect': !defaultGray}"
-          @focus="timeChanges"
-          size="small"
-          v-model="end"
-          type="date"
-          :placeholder="$t('history.endTime')"></el-date-picker>
-        <el-select class="queryTime"
-          :class="{'timeSelect': defaultGray}"
-          @change="changeTime"
-          size="small"
-          @focus="selectTimeChanges"
-          v-model="timevalue"
-          :placeholder="$t('comparison.timeRange')">
+        <el-date-picker class="queryTime" :class="{'timeSelect': !defaultGray}" @focus="timeChanges" size="small" v-model="end" type="date" :placeholder="$t('history.endTime')"></el-date-picker>
+        <el-select class="queryTime" :class="{'timeSelect': defaultGray}" @change="changeTime" size="small" @focus="selectTimeChanges" v-model="timevalue" :placeholder="$t('comparison.timeRange')">
           <!-- 请选择时间范围 -->
-          <el-option v-for="item in weekOption"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
+          <el-option v-for="item in weekOption" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
-        <el-select class="queryTime"
-          size="small"
-          clearable
-          v-model="contrastWay"
-          :placeholder="$t('comparison.comparWay')">
+        <el-select class="queryTime" size="small" clearable v-model="contrastWay" :placeholder="$t('comparison.comparWay')">
           <!-- 请选择对比方式 -->
-          <el-option v-for="item in compare"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
+          <el-option v-for="item in compare" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
-        <el-button @click="sureBtnSearch"
-          class="queryBtn"
-          size="small"
-          type="primary">{{$t('timeBtn.sure')}}</el-button>
+        <el-button @click="sureBtnSearch" class="queryBtn" size="small" type="primary">{{$t('timeBtn.sure')}}</el-button>
       </div>
     </div>
     <div class="chart">
-      <com-chart :loading="chartloading"
-        :chartData="dataArr"
-        :chartBarData="summary"></com-chart>
+      <com-chart :loading="chartloading" :chartData="dataArr" :chartBarData="summary"></com-chart>
     </div>
 
-    <el-dialog :title="$t('comparison.addCompar')"
-      width="800px"
-      :visible.sync="tableVisible">
+    <el-dialog :title="$t('comparison.addCompar')" width="800px" :visible.sync="tableVisible">
       <div class="TopWrapper">
         <div class="item">{{$t('comparison.most')}}
           <span style="color:#71bfdb;font-size: 16px;">1</span>{{$t('comparison.item')}}&nbsp;&nbsp;{{$t('comparison.deviceId')}}：
-          <el-tag v-for="tag in stacks1"
-            :key="tag.hostId+new Date()"
-            @close="closeTags(tag)"
-            :type="''">
+          <el-tag v-for="tag in stacks1" :key="tag.hostId+new Date()" @close="closeTags(tag)" :type="''">
             {{tag.code}}
           </el-tag>
         </div>
 
         <div class="item2">
-          <el-input size="small"
-            @change="remoteMethod"
-            :placeholder="$t('batteryList.searchContent')"
-            suffix-icon="el-icon-search"
-            v-model.trim="searchCont">
+          <el-input size="small" @change="remoteMethod" :placeholder="$t('batteryList.searchContent')" suffix-icon="el-icon-search" v-model.trim="searchCont">
           </el-input>
         </div>
       </div>
-      <el-table :data="gridData"
-        v-loading="loading">
+      <el-table :data="gridData" v-loading="loading">
         <!-- 电池编号 -->
-        <el-table-column property="code"
-          :label="$t('batteryList.batteryCode')"></el-table-column>
+        <el-table-column property="code" :label="$t('batteryList.batteryCode')"></el-table-column>
         <!-- 电池型号 -->
-        <el-table-column property="model"
-          :label="$t('batteryList.model')"></el-table-column>
+        <el-table-column property="model" :label="$t('batteryList.model')"></el-table-column>
         <!-- 电池组规格 -->
-        <el-table-column property="norm"
-          :label="$t('batteryList.specif')"></el-table-column>
+        <el-table-column property="norm" :label="$t('batteryList.specif')"></el-table-column>
         <!-- 监测设备编号 -->
-        <el-table-column property="deviceCode"
-          :label="$t('batteryList.deviceCode')"></el-table-column>
-        <el-table-column :label="$t('alarmList.handle')"
-          width="70">
+        <el-table-column property="deviceCode" :label="$t('batteryList.deviceCode')"></el-table-column>
+        <el-table-column :label="$t('alarmList.handle')" width="70">
           <template slot-scope="scope">
-            <el-checkbox @change="toggleCheck(scope.row)"
-              v-model="scope.row.checked"></el-checkbox>
+            <el-checkbox @change="toggleCheck(scope.row)" v-model="scope.row.checked"></el-checkbox>
           </template>
         </el-table-column>
       </el-table>
       <div class="page">
-        <el-pagination @current-change="handleCurrentChange"
-          :current-page.sync="currentPage"
-          :page-size="8"
-          layout="prev, pager, next"
-          :total="total">
+        <el-pagination @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-size="8" layout="prev, pager, next" :total="total">
         </el-pagination>
       </div>
-      <div slot="footer"
-        class="dialog-footer">
-        <el-button size="small"
-          @click="tableVisible = false">{{$t('timeBtn.cancle')}}</el-button>
-        <el-button size="small"
-          type="primary"
-          @click="sureBtn">{{$t('timeBtn.sure')}}</el-button>
+      <div slot="footer" class="dialog-footer">
+        <el-button size="small" @click="tableVisible = false">{{$t('timeBtn.cancle')}}</el-button>
+        <el-button size="small" type="primary" @click="sureBtn">{{$t('timeBtn.sure')}}</el-button>
         <!-- 确 定 -->
       </div>
     </el-dialog>
@@ -150,7 +91,7 @@ export default {
   components: {
     comChart
   },
-  data () {
+  data() {
     return {
       defaultGray: true,
       // contrastDatas: false,
@@ -239,13 +180,13 @@ export default {
     };
   },
   methods: {
-    timeChanges () {
+    timeChanges() {
       this.defaultGray = true;
     },
-    selectTimeChanges () {
+    selectTimeChanges() {
       this.defaultGray = false;
     },
-    sureBtnSearch () {
+    sureBtnSearch() {
       if (JSON.stringify(this.chooseObj) === "{}") {
         this.$message.error(`${t('comparison.selectBattery')}`);
         return;
@@ -287,7 +228,7 @@ export default {
       }
       this.getDataNow(nowStart, nowEnd);
     },
-    changeTime () {
+    changeTime() {
       if (this.timevalue === "week") {
         this.start = utils.getWeek();
       }
@@ -308,7 +249,7 @@ export default {
       }
       this.end = new Date();
     },
-    getDataNow (startTime, endTime) {
+    getDataNow(startTime, endTime) {
       let hostId = this.chooseObj.hostId;
       let deviceId = this.chooseObj.deviceId;
       this.chartloading = true;
@@ -362,7 +303,7 @@ export default {
         }
       });
     },
-    getDataPrev (startTime, endTime, id, deviceId) {
+    getDataPrev(startTime, endTime, id, deviceId) {
       this.$api.historyData(id, deviceId, startTime, endTime).then(res => {
         console.log(res);
         this.dataObjSecond = {
@@ -420,11 +361,11 @@ export default {
         }
       });
     },
-    remoteMethod () {
+    remoteMethod() {
       this.batteryGroup = this.searchCont;
       this.getBatteryList();
     },
-    sureBtn () {
+    sureBtn() {
       if (this.stacks1.length === 0) {
         this.$message({
           type: "warning",
@@ -438,18 +379,18 @@ export default {
       this.chooseObj = this.stacks1[0];
       // this.stacks2 = JSON.parse(JSON.stringify(this.stacks1));
     },
-    handleCurrentChange (val) {
+    handleCurrentChange(val) {
       this.currentPage = val;
       this.getBatteryList();
     },
-    openTable () {
+    openTable() {
       this.stacks1 = [];
       this.tableVisible = true;
       this.gridData.forEach(key => {
         key.checked = false;
       });
     },
-    toggleCheck (data) {
+    toggleCheck(data) {
       // console.log(data);
       this.stacks1 = [];
       this.gridData.forEach(key => {
@@ -462,11 +403,11 @@ export default {
         this.chooseLen = 1;
       }
     },
-    closeTags (tag) {
+    closeTags(tag) {
       this.stacks1.splice(this.stacks1.indexOf(tag), 1);
     },
     /* 获取电池列表 */
-    getBatteryList () {
+    getBatteryList() {
       this.loading = true;
       let options = {
         pageSize: 8,
@@ -491,7 +432,7 @@ export default {
       });
     }
   },
-  mounted () {
+  mounted() {
     this.getBatteryList();
   }
 };

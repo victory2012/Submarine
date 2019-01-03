@@ -16,9 +16,9 @@ export default {
   text-decoration: none;
   border: none;
   font-weight: normal;
-  font-family: 'Helvetica Neue For Number', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
-    'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
   outline: none;
 }
 html,

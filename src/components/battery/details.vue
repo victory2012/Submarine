@@ -1,14 +1,8 @@
 <template>
-  <el-dialog :title="$t('batteryList.batteryDetail')"
-    @close="closeDetails"
-    :visible="getBatteryDetailShow"
-    width="770px">
+  <el-dialog :title="$t('batteryList.batteryDetail')" @close="closeDetails" :visible="getBatteryDetailShow" width="770px">
     <div class="detailCenter">
-      <div class="edit"
-        v-if="AdminRoles.AddBatteries">
-        <el-button size="mini"
-          type="primary"
-          @click="editDetails">{{$t('user.edit')}}</el-button>
+      <div class="edit" v-if="AdminRoles.AddBatteries">
+        <el-button size="mini" type="primary" @click="editDetails">{{$t('user.edit')}}</el-button>
       </div>
       <table>
         <tr>
@@ -28,30 +22,16 @@
           <td class="titles">{{$t('batteryList.model')}}</td>
           <td>
             <!-- <el-input size="mini" v-show="Edit" v-model="editObj.model"></el-input> -->
-            <el-select v-show="Edit"
-              size="mini"
-              style="width: 195px"
-              v-model="editObj.modelId"
-              :placeholder="$t('batteryList.batteryCode')">
-              <el-option v-for="item in getGroupModelOpts"
-                :key="item.id"
-                :label="item.dicKey"
-                :value="item.id">
+            <el-select v-show="Edit" size="mini" style="width: 195px" v-model="editObj.modelId" :placeholder="$t('batteryList.batteryCode')">
+              <el-option v-for="item in getGroupModelOpts" :key="item.id" :label="item.dicKey" :value="item.id">
               </el-option>
             </el-select>
             <p v-show="!Edit">{{BATTERYDETAILDATA.model}}</p>
           </td>
           <td class="titles">{{$t('batteryList.specif')}}</td>
           <td>
-            <el-select v-show="Edit"
-              size="mini"
-              style="width: 195px"
-              v-model="editObj.normId"
-              :placeholder="$t('batteryList.specif')">
-              <el-option v-for="item in getBatGroupSpecifOpts"
-                :key="item.id"
-                :label="item.dicKey"
-                :value="item.id">
+            <el-select v-show="Edit" size="mini" style="width: 195px" v-model="editObj.normId" :placeholder="$t('batteryList.specif')">
+              <el-option v-for="item in getBatGroupSpecifOpts" :key="item.id" :label="item.dicKey" :value="item.id">
               </el-option>
             </el-select>
             <!-- <el-input size="mini" v-show="Edit" v-model="editObj.norm"></el-input> -->
@@ -62,20 +42,13 @@
           <!-- 电池组额定电压 -->
           <td class="titles">{{$t('batteryList.batteryVoltage')}}</td>
           <td>
-            <el-input size="mini"
-              v-show="Edit"
-              style="width: 195px"
-              v-model.trim="editObj.voltage"></el-input>
+            <el-input size="mini" v-show="Edit" style="width: 195px" v-model.trim="editObj.voltage"></el-input>
             <p v-show="!Edit">{{BATTERYDETAILDATA.voltage}}</p>
           </td>
           <!-- 电池组额定容量 -->
           <td class="titles">{{$t('batteryList.batteryCapacity')}}</td>
           <td>
-            <el-input size="mini"
-              v-show="Edit"
-              style="width: 195px"
-              value="number"
-              v-model.trim="editObj.capacity"></el-input>
+            <el-input size="mini" v-show="Edit" style="width: 195px" value="number" v-model.trim="editObj.capacity"></el-input>
             <p v-show="!Edit">{{BATTERYDETAILDATA.capacity}}</p>
           </td>
         </tr>
@@ -84,15 +57,8 @@
           <td class="titles">{{$t('batteryList.singleBattery')}}</td>
           <!-- colspan="3" -->
           <td>
-            <el-select v-show="Edit"
-              size="mini"
-              style="width: 195px"
-              v-model="editObj.singleModelId"
-              :placeholder="$t('batteryList.singleBattery')">
-              <el-option v-for="item in getSingleBatteryOpts"
-                :key="item.id"
-                :label="item.dicKey"
-                :value="item.id">
+            <el-select v-show="Edit" size="mini" style="width: 195px" v-model="editObj.singleModelId" :placeholder="$t('batteryList.singleBattery')">
+              <el-option v-for="item in getSingleBatteryOpts" :key="item.id" :label="item.dicKey" :value="item.id">
               </el-option>
             </el-select>
             <!-- <el-input size="mini" v-show="Edit" v-model="editObj.singleModel"></el-input> -->
@@ -103,30 +69,14 @@
           <!-- 电池组生产日期 -->
           <td class="titles">{{$t('batteryList.createDate')}}</td>
           <td>
-            <el-date-picker v-show="Edit"
-              size="small"
-              :clearable='false'
-              value-format="yyyy-MM-dd"
-              style="width: 195px"
-              :default-value="editObj.manufacturerDate"
-              v-model="editObj.manufacturerDate"
-              type="date"
-              :placeholder="$t('batteryList.createDate')">
+            <el-date-picker v-show="Edit" size="small" :clearable='false' value-format="yyyy-MM-dd" style="width: 195px" :default-value="editObj.manufacturerDate" v-model="editObj.manufacturerDate" type="date" :placeholder="$t('batteryList.createDate')">
             </el-date-picker>
             <p v-show="!Edit">{{BATTERYDETAILDATA.manufacturerDate}}</p>
           </td>
           <!-- 电池组出厂日期 -->
           <td class="titles">{{$t('batteryList.manufactureDate')}}</td>
           <td>
-            <el-date-picker v-show="Edit"
-              size="small"
-              :clearable='false'
-              value-format="yyyy-MM-dd"
-              style="width: 195px"
-              :default-value="editObj.productionDate"
-              v-model="editObj.productionDate"
-              type="date"
-              :placeholder="$t('batteryList.manufactureDate')">
+            <el-date-picker v-show="Edit" size="small" :clearable='false' value-format="yyyy-MM-dd" style="width: 195px" :default-value="editObj.productionDate" v-model="editObj.productionDate" type="date" :placeholder="$t('batteryList.manufactureDate')">
             </el-date-picker>
             <p v-show="!Edit">{{BATTERYDETAILDATA.productionDate}}</p>
           </td>
@@ -135,15 +85,7 @@
           <!-- 电池组质保期 -->
           <td class="titles">{{$t('batteryList.warrantyDate')}}</td>
           <td>
-            <el-date-picker v-show="Edit"
-              size="small"
-              :clearable='false'
-              value-format="yyyy-MM-dd"
-              style="width: 195px"
-              :default-value="editObj.qualityGuaranteeDate"
-              v-model="editObj.qualityGuaranteeDate"
-              type="date"
-              :placeholder="$t('batteryList.warrantyDate')">
+            <el-date-picker v-show="Edit" size="small" :clearable='false' value-format="yyyy-MM-dd" style="width: 195px" :default-value="editObj.qualityGuaranteeDate" v-model="editObj.qualityGuaranteeDate" type="date" :placeholder="$t('batteryList.warrantyDate')">
             </el-date-picker>
             <p v-show="!Edit">{{BATTERYDETAILDATA.qualityGuaranteeDate}}</p>
           </td>
@@ -154,19 +96,11 @@
         </tr>
       </table>
     </div>
-    <div slot="footer"
-      class="dialog-footer">
-      <el-button v-show="Edit"
-        size="small"
-        @click="cancelSaveDetails">{{$t('timeBtn.cancle')}}</el-button>
-      <el-button v-show="Edit"
-        type="danger"
-        size="small"
-        @click="saveDetails">{{$t('timeBtn.save')}}</el-button>
+    <div slot="footer" class="dialog-footer">
+      <el-button v-show="Edit" size="small" @click="cancelSaveDetails">{{$t('timeBtn.cancle')}}</el-button>
+      <el-button v-show="Edit" type="danger" size="small" @click="saveDetails">{{$t('timeBtn.save')}}</el-button>
 
-      <el-button v-show="!Edit"
-        size="small"
-        @click="closeDetails">{{$t('timeBtn.confirm')}}</el-button>
+      <el-button v-show="!Edit" size="small" @click="closeDetails">{{$t('timeBtn.confirm')}}</el-button>
     </div>
   </el-dialog>
 </template>
@@ -193,7 +127,7 @@ export default {
       "getSingleBatteryOpts"
     ])
   },
-  data () {
+  data() {
     return {
       editObj: {},
       Edit: false,
@@ -202,17 +136,17 @@ export default {
     };
   },
   methods: {
-    closeDetails () {
+    closeDetails() {
       this.Edit = false;
       this.$store.commit("SETBATTERYDETAIL", false);
     },
     /* 编辑 */
-    editDetails () {
+    editDetails() {
       this.Edit = true;
       this.editObj = deepClone(this.BATTERYDETAILDATA);
     },
     /* 保存 */
-    saveDetails () {
+    saveDetails() {
       if (!this.AdminRoles.AddBatteries) {
         return;
       }
@@ -287,7 +221,7 @@ export default {
       });
     },
     /* 取消保存 */
-    cancelSaveDetails () {
+    cancelSaveDetails() {
       // this.editObj = deepClone(this.BATTERYDETAILDATA);
       this.Edit = false;
     }

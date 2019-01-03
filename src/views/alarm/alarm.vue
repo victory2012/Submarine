@@ -176,7 +176,7 @@ import utils from "@/utils/utils";
 import t from "@/utils/translate";
 
 export default {
-  data () {
+  data() {
     return {
       loading: true,
       currentPage: 1,
@@ -242,11 +242,11 @@ export default {
       ]
     };
   },
-  mounted () {
+  mounted() {
     this.getListData();
   },
   methods: {
-    handleClick (row) {
+    handleClick(row) {
       this.rowObj = row;
       this.$api.allAlarmData(row.dataId).then(res => {
         console.log(res);
@@ -263,15 +263,15 @@ export default {
         }
       });
     },
-    handleSizeChange (val) {
+    handleSizeChange(val) {
       this.pageSize = val;
       this.getListData();
     },
-    handleCurrentChange (val) {
+    handleCurrentChange(val) {
       this.currentPage = val;
       this.getListData();
     },
-    search () {
+    search() {
       if (new Date(this.alarm.endTime).getTime() < new Date(this.alarm.startTime).getTime()) {
         this.$message.error(t('history.checkErr'));
         return;
@@ -279,12 +279,12 @@ export default {
       this.currentPage = 1;
       this.getListData();
     },
-    clearAll () {
+    clearAll() {
       this.currentPage = 1;
       this.alarm = {};
       this.getListData();
     },
-    getListData () {
+    getListData() {
       this.loading = true;
       let pageObj = {
         pageSize: this.pageSize,

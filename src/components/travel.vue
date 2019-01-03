@@ -1,56 +1,29 @@
 <template>
   <div class="maps">
     <div class="date">
-      <el-button v-show="!trajectory"
-        size="mini"
-        plain
-        @click="startOnclick"
-        :title="$t('history.start')">
+      <el-button v-show="!trajectory" size="mini" plain @click="startOnclick" :title="$t('history.start')">
         <i class="iconfont icon-ic_song_next"></i>
       </el-button>
-      <el-button v-show="!trajectory"
-        size="mini"
-        plain
-        @click="pauseOnclick"
-        :title="$t('history.pause')">
+      <el-button v-show="!trajectory" size="mini" plain @click="pauseOnclick" :title="$t('history.pause')">
         <i class="iconfont icon-artboard25copy"></i>
       </el-button>
-      <el-button v-show="!trajectory"
-        size="mini"
-        plain
-        @click="resumeOnclick"
-        :title="$t('history.continue')">
+      <el-button v-show="!trajectory" size="mini" plain @click="resumeOnclick" :title="$t('history.continue')">
         <i class="iconfont icon-icons-resume_button"></i>
       </el-button>
-      <el-button v-show="!trajectory"
-        size="mini"
-        plain
-        @click="stopOnclick"
-        :title="$t('history.stop')">
+      <el-button v-show="!trajectory" size="mini" plain @click="stopOnclick" :title="$t('history.stop')">
         <i class="iconfont icon-stop"></i>
       </el-button>
       <!-- 活动热区 -->
-      <el-button v-show="!trajectory"
-        type="danger"
-        size="small"
-        @click="heat">{{$t('history.heatActive')}}</el-button>
+      <el-button v-show="!trajectory" type="danger" size="small" @click="heat">{{$t('history.heatActive')}}</el-button>
       <!-- 轨迹回放 -->
-      <el-button v-show="trajectory"
-        type="primary"
-        size="mini"
-        @click="posi">{{$t('history.TrackReplay')}}</el-button>
+      <el-button v-show="trajectory" type="primary" size="mini" @click="posi">{{$t('history.TrackReplay')}}</el-button>
     </div>
-    <div class="timeRange"
-      v-show="!trajectory">
+    <div class="timeRange" v-show="!trajectory">
       <span>{{$t('history.times')}}(s)</span>
-      <el-slider v-model="timeSeconds"
-        @change="speedChange"
-        vertical
-        height="200px">
+      <el-slider v-model="timeSeconds" @change="speedChange" vertical height="200px">
       </el-slider>
     </div>
-    <div id="historyContent"
-      class="historyContent"></div>
+    <div id="historyContent" class="historyContent"></div>
   </div>
 </template>
 <script>
@@ -89,7 +62,7 @@ export default {
       deep: true
     }
   },
-  data () {
+  data() {
     return {
       trajectory: true,
       markerArr: [],
@@ -97,11 +70,11 @@ export default {
       alldistance: 0
     };
   },
-  mounted () {
+  mounted() {
     this.mapInit();
   },
   methods: {
-    mapInit () {
+    mapInit() {
       const lang = localStorage.getItem('locale') === 'en' ? 'en' : 'zh_cn';
       map = new AMap.Map("historyContent", {
         resizeEnable: true,
@@ -116,14 +89,14 @@ export default {
         });
       });
     },
-    heat () {
+    heat() {
       this.heatMapFun(this.travelData.heatmap);
     },
-    posi () {
+    posi() {
       this.positionChange(this.travelData.travel);
     },
     /* 热力图 方法 */
-    heatMapFun (heatData) {
+    heatMapFun(heatData) {
       this.trajectory = true;
       if (!heatData[0] || !heatData[0].lng) {
         return;
@@ -139,7 +112,7 @@ export default {
       });
     },
     /* 轨迹相关方法 */
-    positionChange (positions) {
+    positionChange(positions) {
       this.trajectory = false;
       heatmap && heatmap.setDataSet({ data: [] });
       if (!positions || positions.length < 1) {
@@ -271,24 +244,24 @@ export default {
       });
     },
     // 开始运动
-    startOnclick () {
+    startOnclick() {
       navg && navg.start();
     },
     // 暂停运动
-    pauseOnclick () {
+    pauseOnclick() {
       navg && navg.pause();
     },
     // 继续运动
-    resumeOnclick () {
+    resumeOnclick() {
       navg && navg.resume();
     },
     // 停止运动
-    stopOnclick () {
+    stopOnclick() {
       navg && navg.stop();
       // map.clearMap();
     },
     /* 设置速度 */
-    speedChange () {
+    speedChange() {
       if (this.timeSeconds < 1) {
         this.timeSeconds = 1;
       }
@@ -298,7 +271,7 @@ export default {
       navg.setSpeed(speeds);
     }
   },
-  destroyed () {
+  destroyed() {
     map.destroy();
     pathSimplifierIns && pathSimplifierIns.setData();
   }

@@ -36,7 +36,7 @@ export default {
       default: () => []
     }
   },
-  data () {
+  data() {
     return {
       currentPage: 1,
       tableData: this.liquidData,
@@ -51,7 +51,7 @@ export default {
       deep: true
     }
   },
-  mounted () {
+  mounted() {
     // this.getliquidData();
   },
   methods: {

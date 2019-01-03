@@ -1,8 +1,7 @@
 <template>
   <div class="circel">
     <div class="circelInfo">
-      <div class="pei"
-        id="peiCharts1"></div>
+      <div class="pei" id="peiCharts1"></div>
     </div>
     <div class="circelInfo">
       <div class="item-history_alarm_divider">
@@ -11,8 +10,7 @@
       </div>
     </div>
     <div class="circelInfo">
-      <div class="pei"
-        id="peiCharts2"></div>
+      <div class="pei" id="peiCharts2"></div>
     </div>
   </div>
 </template>
@@ -41,7 +39,7 @@ export default {
       }
     }
   },
-  data () {
+  data() {
     return {
       pieOption: {
         tooltip: {
@@ -98,11 +96,11 @@ export default {
       deep: true
     }
   },
-  mounted () {
+  mounted() {
     this.init();
   },
   methods: {
-    init () {
+    init() {
       let BarDOM1 = document.getElementById("peiCharts1");
       let BarDOM2 = document.getElementById("peiCharts2");
 
@@ -111,7 +109,7 @@ export default {
       this.loadingChange(this.loading);
       this.dataChange(this.peiData);
     },
-    loadingChange (loading) {
+    loadingChange(loading) {
       if (loading) {
         this.peiEcharts1.showLoading();
         this.peiEcharts2.showLoading();
@@ -120,7 +118,7 @@ export default {
         this.peiEcharts2.hideLoading();
       }
     },
-    dataChange (peiData) {
+    dataChange(peiData) {
       let voltageOptions = deepClone(this.pieOption);
       voltageOptions.legend.data = [t('history.chargeDuration'), t('history.dischargeDuration'), t('history.empty')]; // ["充电时间", "放电时间", "空载时间"];
       voltageOptions.tooltip.formatter = p => {

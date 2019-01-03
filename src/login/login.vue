@@ -57,7 +57,7 @@
 import t from "@/utils/translate";
 
 export default {
-  data () {
+  data() {
     return {
       localLanguge: '',
       hasGetSms: false,
@@ -108,7 +108,7 @@ export default {
       }
     };
   },
-  created () {
+  created() {
     let locallanguage = localStorage.getItem("locale");
     if (locallanguage) {
       this.localLanguge = locallanguage === "zh" ? "中文" : "English";
@@ -130,7 +130,7 @@ export default {
     }
   },
   methods: {
-    accountLogin (LoginForm) {
+    accountLogin(LoginForm) {
       this.$refs[LoginForm].validate(valid => {
         if (valid) {
           this.doLogin = true;
@@ -159,7 +159,7 @@ export default {
         }
       });
     },
-    getSmsCode () {
+    getSmsCode() {
       this.$refs.smsPhone.validateField("phone", opts => {
         console.log(opts);
         if (opts === "" || opts === undefined || opts === null) {
@@ -186,7 +186,7 @@ export default {
         }
       });
     },
-    checkSmsCode () {
+    checkSmsCode() {
       this.$refs.smsPhone.validate(valid => {
         if (valid) {
           this.doLogin = true;
@@ -214,7 +214,7 @@ export default {
         }
       });
     },
-    handleCommand (cammand) {
+    handleCommand(cammand) {
       if (cammand === "zh") {
         this.localLanguge = "中文";
         this.$i18n.locale = "zh";

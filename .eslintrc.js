@@ -68,6 +68,8 @@ module.exports = {
     "no-new": 0,
     "vars-on-top": 0,
     "space-before-function-paren": 0,
-    "radix": 0
+    "radix": 0,
+    'linebreak-style': 0,
+    'space-in-parens': 0,
   }
 }
